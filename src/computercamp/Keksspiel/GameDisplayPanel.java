@@ -6,15 +6,21 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class GameDisplayPanel extends JPanel implements MouseListener, KeyListener
+public class GameDisplayPanel extends JPanel implements MouseListener, KeyListener, MouseMotionListener
 {
+	private int lastmousex, lastmousey;
+	private int speed;
+	private int barlength;
+	
 	public GameDisplayPanel()
 	{
 		addMouseListener(this);
+		addMouseMotionListener(this);
 		Main.frame.addKeyListener(this);
 	}
 	
@@ -22,6 +28,11 @@ public class GameDisplayPanel extends JPanel implements MouseListener, KeyListen
 	{
 		Rectangle size = g.getClipBounds();
 		g.drawImage(Ressource.get("background"), 0, 0, size.width, size.height, null);
+		g.drawImage(Ressource.get("Figur1"), 500, 10 , 800,800, null);
+		g.drawImage(Ressource.get("penis_basic"), 880,450, 100,100,null);
+		
+		g.fillRect(10, 10, (int) (barlength * 0.01), 30);
+	
 	}
 
 	@Override
@@ -42,4 +53,23 @@ public class GameDisplayPanel extends JPanel implements MouseListener, KeyListen
 	@Override public void mouseEntered(MouseEvent arg0) {}
 	@Override public void mouseExited(MouseEvent arg0) {}
 	@Override public void mouseReleased(MouseEvent arg0) {}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		
+		speed = (int)Math.sqrt(((lastmousex - e.getX()) * (lastmousex - e.getX())) + (lastmousey - e.getY()) * (lastmousey - e.getY()));
+		System.out.println(speed);
+		lastmousex = e.getX();
+		lastmousey = e.getY();
+		
+		barlength += speed;
+		repaint();
+		
+	}
 }
