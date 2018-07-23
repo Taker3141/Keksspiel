@@ -32,14 +32,16 @@ public class GameDisplayPanel extends JPanel implements MouseListener, KeyListen
 		//g.drawImage(Ressource.get("penis_basic"), 880,450, 100,100,null);
 		g.drawImage(Ressource.get("Keks"), size.width / 2, 4 * size.height / 5, size.width / 20, size.height / 10, null);
 		int pw = size.width / 4, ph = size.height / 2;
-		g.drawImage(Ressource.get("player0"), size.width / 10, size.height / 3, pw, ph, null);
-		g.drawImage(Ressource.get("player1"), 2 * size.width / 10, size.height / 3, pw, ph, null);
-		g.drawImage(Ressource.get("player2"), 6 * size.width / 10, size.height / 3, pw, ph, null);
-		g.drawImage(Ressource.get("player3"), 7 * size.width / 10, size.height / 3, pw, ph, null);
-		g.drawImage(Ressource.get("penis_basic"), size.width / 10 + pw / 2, size.height / 3 + ph / 2, size.width / 20, size.height / 10, null);
-		g.drawImage(Ressource.get("penis_basic"), 2 * size.width / 10 + pw / 2, size.height / 3 + ph / 2, size.width / 20, size.height / 10, null);
-		g.drawImage(Ressource.get("penis_basic"), 6 * size.width / 10 + pw / 2, size.height / 3 + ph / 2, -size.width / 20, size.height / 10, null);
-		g.drawImage(Ressource.get("penis_basic"), 7 * size.width / 10 + pw / 2, size.height / 3 + ph / 2, -size.width / 20, size.height / 10, null);
+		for(int i = 0; i < Main.player.length; i++)
+		{
+			Player p = Main.player[i];
+			g.drawImage(p.getTexture(), (int)(p.px * size.width), (int)(p.py * size.height), (int)(p.pw * size.width), (int)(p.ph * size.height), null);
+			g.drawImage(p.dick.getTexture(), (int) ((p.px + p.pw/2) * size.width), (int) ((p.py + p.ph/2) * size.height), (int) (p.dick.dw * size.width * (i < 2 ? 1 : -1)),(int) (p.dick.dh * size.height), null);
+		}
+//		g.drawImage(Ressource.get("penis_basic"), size.width / 10 + pw / 2, size.height / 3 + ph / 2, size.width / 20, size.height / 10, null);
+//		g.drawImage(Ressource.get("penis_basic"), 2 * size.width / 10 + pw / 2, size.height / 3 + ph / 2, size.width / 20, size.height / 10, null);
+//		g.drawImage(Ressource.get("penis_basic"), 6 * size.width / 10 + pw / 2, size.height / 3 + ph / 2, -size.width / 20, size.height / 10, null);
+//		g.drawImage(Ressource.get("penis_basic"), 7 * size.width / 10 + pw / 2, size.height / 3 + ph / 2, -size.width / 20, size.height / 10, null);
 		g.fillRect(10, 10, (int) (barlength * 0.01), 30);
 	
 	}

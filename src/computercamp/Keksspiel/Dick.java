@@ -5,7 +5,8 @@ import java.awt.Image;
 
 public class Dick {
 	
-	int length;
+	public float dw = 1f / 20f;
+	public float dh = 1f / 10f;
 	Color color = new Color(0);
 	
 	

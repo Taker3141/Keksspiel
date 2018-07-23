@@ -10,4 +10,5 @@ public class Cookie
 	{
 		return Ressource.get("Keks");
 	}
+	
 }
