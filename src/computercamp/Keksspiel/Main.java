@@ -11,7 +11,7 @@ public class Main
 	public static void main(String[] args)
 	{
 		frame = new JFrame("Keksspiel");
-		frame.setSize(2048, 1024);
+		frame.setSize(1024, 512);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		display = new GameDisplayPanel();
 		frame.add(display);

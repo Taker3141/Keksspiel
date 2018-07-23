@@ -28,9 +28,13 @@ public class GameDisplayPanel extends JPanel implements MouseListener, KeyListen
 	{
 		Rectangle size = g.getClipBounds();
 		g.drawImage(Ressource.get("background"), 0, 0, size.width, size.height, null);
-		g.drawImage(Ressource.get("Figur1"), 500, 10 , 800,800, null);
-		g.drawImage(Ressource.get("penis_basic"), 880,450, 100,100,null);
-		
+		//g.drawImage(Ressource.get("Figur1"), 500, 10 , 800,800, null);
+		//g.drawImage(Ressource.get("penis_basic"), 880,450, 100,100,null);
+		g.drawImage(Ressource.get("Keks"), size.width / 2, 4 * size.height / 5, size.width / 20, size.height / 10, null);
+		g.drawImage(Ressource.get("player0"), size.width / 10, size.height / 3, size.width / 4, size.height / 2, null);
+		g.drawImage(Ressource.get("player1"), 2 * size.width / 10, size.height / 3, size.width / 4, size.height / 2, null);
+		g.drawImage(Ressource.get("player2"), 6 * size.width / 10, size.height / 3, size.width / 4, size.height / 2, null);
+		g.drawImage(Ressource.get("player3"), 7 * size.width / 10, size.height / 3, size.width / 4, size.height / 2, null);
 		g.fillRect(10, 10, (int) (barlength * 0.01), 30);
 	
 	}
@@ -73,3 +77,4 @@ public class GameDisplayPanel extends JPanel implements MouseListener, KeyListen
 		
 	}
 }
+
