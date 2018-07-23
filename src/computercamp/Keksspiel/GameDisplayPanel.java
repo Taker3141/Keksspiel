@@ -1,5 +1,6 @@
 package computercamp.Keksspiel;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -22,6 +23,11 @@ public class GameDisplayPanel extends JPanel implements MouseListener, KeyListen
 	{
 		Rectangle size = g.getClipBounds();
 		g.drawImage(Ressource.get("background"), 0, 0, size.width, size.height, null);
+		g.drawImage(Ressource.get("Keks"), size.width / 2, 4 * size.height / 5, size.width / 20, size.height / 10, null);
+		g.drawImage(Ressource.get("player0"), size.width / 10, size.height / 3, size.width / 4, size.height / 2, null);
+		g.drawImage(Ressource.get("player1"), 2 * size.width / 10, size.height / 3, size.width / 4, size.height / 2, null);
+		g.drawImage(Ressource.get("player2"), 6 * size.width / 10, size.height / 3, size.width / 4, size.height / 2, null);
+		g.drawImage(Ressource.get("player3"), 7 * size.width / 10, size.height / 3, size.width / 4, size.height / 2, null);
 	}
 
 	@Override
