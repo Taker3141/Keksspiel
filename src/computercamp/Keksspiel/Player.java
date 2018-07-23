@@ -12,6 +12,7 @@ public class Player {
 	public float ph;
 	private static int pcounter = 0;
 	public final int id;
+	public float distanceFromCookie = -1;
 	
 	public Player(String name, float px, float py, float pw, float ph) {
 		super();
