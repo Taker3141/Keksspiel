@@ -31,10 +31,15 @@ public class GameDisplayPanel extends JPanel implements MouseListener, KeyListen
 		//g.drawImage(Ressource.get("Figur1"), 500, 10 , 800,800, null);
 		//g.drawImage(Ressource.get("penis_basic"), 880,450, 100,100,null);
 		g.drawImage(Ressource.get("Keks"), size.width / 2, 4 * size.height / 5, size.width / 20, size.height / 10, null);
-		g.drawImage(Ressource.get("player0"), size.width / 10, size.height / 3, size.width / 4, size.height / 2, null);
-		g.drawImage(Ressource.get("player1"), 2 * size.width / 10, size.height / 3, size.width / 4, size.height / 2, null);
-		g.drawImage(Ressource.get("player2"), 6 * size.width / 10, size.height / 3, size.width / 4, size.height / 2, null);
-		g.drawImage(Ressource.get("player3"), 7 * size.width / 10, size.height / 3, size.width / 4, size.height / 2, null);
+		int pw = size.width / 4, ph = size.height / 2;
+		g.drawImage(Ressource.get("player0"), size.width / 10, size.height / 3, pw, ph, null);
+		g.drawImage(Ressource.get("player1"), 2 * size.width / 10, size.height / 3, pw, ph, null);
+		g.drawImage(Ressource.get("player2"), 6 * size.width / 10, size.height / 3, pw, ph, null);
+		g.drawImage(Ressource.get("player3"), 7 * size.width / 10, size.height / 3, pw, ph, null);
+		g.drawImage(Ressource.get("penis_basic"), size.width / 10 + pw / 2, size.height / 3 + ph / 2, size.width / 20, size.height / 10, null);
+		g.drawImage(Ressource.get("penis_basic"), 2 * size.width / 10 + pw / 2, size.height / 3 + ph / 2, size.width / 20, size.height / 10, null);
+		g.drawImage(Ressource.get("penis_basic"), 6 * size.width / 10 + pw / 2, size.height / 3 + ph / 2, -size.width / 20, size.height / 10, null);
+		g.drawImage(Ressource.get("penis_basic"), 7 * size.width / 10 + pw / 2, size.height / 3 + ph / 2, -size.width / 20, size.height / 10, null);
 		g.fillRect(10, 10, (int) (barlength * 0.01), 30);
 	
 	}
@@ -68,7 +73,6 @@ public class GameDisplayPanel extends JPanel implements MouseListener, KeyListen
 	public void mouseMoved(MouseEvent e) {
 		
 		speed = (int)Math.sqrt(((lastmousex - e.getX()) * (lastmousex - e.getX())) + (lastmousey - e.getY()) * (lastmousey - e.getY()));
-		System.out.println(speed);
 		lastmousex = e.getX();
 		lastmousey = e.getY();
 		
