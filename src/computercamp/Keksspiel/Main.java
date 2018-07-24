@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 public class Main
 {
 	public static JFrame frame;
-	public static JPanel display;
+	public static DisplayPanel display;
 	public static Player[] player = new Player[4];
 	
 	public static void main(String[] args)
@@ -23,6 +23,18 @@ public class Main
 		frame.add(display);
 		frame.setVisible(true);
 		
+	}
+	
+	public static void changeDisplay(DisplayPanel newDisplay)
+	{
+		frame.remove(display);
+		frame.removeKeyListener(display);
+		display = newDisplay;
+		frame.add(display);
+		frame.addKeyListener(display);
+		frame.repaint();
+		frame.setSize(frame.getWidth() + 1, frame.getHeight());
+		frame.setSize(frame.getWidth() - 1, frame.getHeight());
 	}
 	
 }
