@@ -7,6 +7,7 @@ public class Player
 	public Dick dick = new Dick();
 	public String name;
 	public int money;
+	public float cum = 1;
 	public float px;
 	public float py;
 	public float pw;

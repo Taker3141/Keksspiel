@@ -21,7 +21,7 @@ public class GameDisplayPanel extends DisplayPanel
 	private int barlength;
 	private boolean came = false;
 	private List<Cum> cumList = new ArrayList<Cum>();
-	private static final float JERK_DURATION = 10000;
+	public static float JERK_DURATION = 10000;
 	private Button shopbutton = new Button(15f/17f, 1f/9f, 1f/9f, 1f/9f);
 	
 	public GameDisplayPanel()
@@ -45,7 +45,7 @@ public class GameDisplayPanel extends DisplayPanel
 		}
 		for(Cum c : cumList)
 		{
-			g.drawImage(c.getTexture(), (int)(c.px * size.width) - (int)(c.w * size.width * 0.5f), (int)(c.py * size.height) - (int)(c.h * size.height * 0.5f), (int)(c.w * size.width), (int)(c.h * size.height), null);			
+			g.drawImage(c.getTexture(), (int)(c.px * size.width) - (int)(c.w * size.width * 0.5f * Main.player[0].cum), (int)(c.py * size.height) - (int)(c.h * size.height * 0.5f * Main.player[0].cum), (int)(c.w * size.width * Main.player[0].cum), (int)(c.h * size.height * Main.player[0].cum), null);			
 		}
 		if(!came) 
 		{
