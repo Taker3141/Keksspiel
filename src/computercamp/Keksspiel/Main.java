@@ -19,7 +19,7 @@ public class Main
 		frame = new JFrame("Keksspiel");
 		frame.setSize(1024, 512);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		display = new ShopDisplayPanel();
+		display = new GameDisplayPanel();
 		frame.add(display);
 		frame.setVisible(true);
 		

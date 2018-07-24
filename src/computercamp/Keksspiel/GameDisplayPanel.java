@@ -44,9 +44,14 @@ public class GameDisplayPanel extends JPanel implements MouseListener, KeyListen
 		}
 		for(Cum c : cumList)
 		{
-			g.drawImage(c.getTexture(), (int)(c.px * size.width), (int)(c.py * size.height), (int)(c.w * size.width), (int)(c.h * size.height), null);
+			g.drawImage(c.getTexture(), (int)(c.px * size.width) - (int)(c.w * size.width * 0.5f), (int)(c.py * size.height) - (int)(c.h * size.height * 0.5f), (int)(c.w * size.width), (int)(c.h * size.height), null);
 		}
-		if(!came) g.fillRect(10, 10, (int) (barlength * (1 / JERK_DURATION) * size.width), 30);
+		if(!came) 
+		{
+			g.drawImage(Ressource.get("jerk_bar_balls"), 10, 10, 60, 60, null);
+			g.drawImage(Ressource.get("jerk_bar_cock"), 70, 10, (int) (barlength * (1 / JERK_DURATION) * size.width) - 120, 60, null);
+			g.drawImage(Ressource.get("jerk_bar_tip"), (int) (barlength * (1 / JERK_DURATION) * size.width) - 60, 10, 60, 60, null);
+		}
 	}
 
 	@Override
