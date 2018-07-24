@@ -1,5 +1,6 @@
 package computercamp.Keksspiel;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -39,7 +40,8 @@ public class ShopDisplayPanel extends JPanel implements MouseListener, KeyListen
 		g.drawImage(Ressource.get("penis_bbc"), (int) (1f/20f * size.width), (int) (0.5f/1f * size.height), (int) (1f/6f * size.width), (int) (1f/6f * size.height), null);
 		g.drawImage(Ressource.get("penis_longschlong"), (int) (7f/20f * size.width), (int) (0.5f/1f * size.height), (int) (1f/6f * size.width), (int) (1f/6f * size.height), null);
 		g.drawImage(Ressource.get("penis_triangle"), (int) (13f/20f * size.width), (int) (0.5f/1f * size.height), (int) (1f/6f * size.width), (int) (1f/6f * size.height), null);
-
+		g.setFont(new Font("Arial",0,26));
+		g.drawString("Coins: 50",(int) (13f/19.7f * size.width), (int) (1f/2.2f * size.height));
 	
 	}
 	
@@ -61,6 +63,20 @@ public class ShopDisplayPanel extends JPanel implements MouseListener, KeyListen
 		if(checkbutton(buttonfastercum, e.getX(), e.getY())) 
 		{
 			System.out.println("Clicked Faster Cum");
+			
+			if()
+		}
+		if(checkbutton(buttonbbc, e.getX(), e.getY())) 
+		{
+			System.out.println("Clicked BBC");
+		}
+		if(checkbutton(buttonlongschlong, e.getX(), e.getY())) 
+		{
+			System.out.println("Clicked Longschlong");
+		}
+		if(checkbutton(buttontriangle, e.getX(), e.getY())) 
+		{
+			System.out.println("Clicked triangledick");
 		}
 	}
 

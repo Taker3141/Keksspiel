@@ -27,6 +27,8 @@ public class Player {
 		id = pcounter;
 		pcounter++;
 	}
+	
+	
 
 	public Image getTexture() {
 
