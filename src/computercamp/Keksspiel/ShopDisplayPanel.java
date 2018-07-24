@@ -37,7 +37,7 @@ public class ShopDisplayPanel extends JPanel implements MouseListener, KeyListen
 		g.drawImage(Ressource.get("Button"),(int)(buttonlongschlong.bx * size.width), (int)(buttonlongschlong.by * size.height), (int)(buttonlongschlong.bl * size.width), (int)(buttonlongschlong.bh * size.height), null);
 		g.drawImage(Ressource.get("Button"),(int)(buttontriangle.bx * size.width), (int)(buttontriangle.by * size.height), (int)(buttontriangle.bl * size.width), (int)(buttontriangle.bh * size.height), null);
 		g.drawImage(Ressource.get("penis_bbc"), (int) (1f/20f * size.width), (int) (0.5f/1f * size.height), (int) (1f/6f * size.width), (int) (1f/6f * size.height), null);
-		g.drawImage(Ressource.get("penis_longschlong"), (int) (4f/20f * size.width), (int) (0.5f/1f * size.height), (int) (1f/6f * size.width), (int) (1f/6f * size.height), null);
+		g.drawImage(Ressource.get("penis_longschlong"), (int) (7f/20f * size.width), (int) (0.5f/1f * size.height), (int) (1f/6f * size.width), (int) (1f/6f * size.height), null);
 		g.drawImage(Ressource.get("penis_triangle"), (int) (13f/20f * size.width), (int) (0.5f/1f * size.height), (int) (1f/6f * size.width), (int) (1f/6f * size.height), null);
 
 	
