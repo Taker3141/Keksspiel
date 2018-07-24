@@ -14,14 +14,13 @@ import java.util.List;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class GameDisplayPanel extends JPanel implements MouseListener, KeyListener, MouseMotionListener
+public class GameDisplayPanel extends DisplayPanel
 {
 	private int lastmousex, lastmousey;
 	private int speed;
 	private int barlength;
 	private boolean came = false;
 	private List<Cum> cumList = new ArrayList<Cum>();
-	private Rectangle size;
 	private static final float JERK_DURATION = 10000;
 	private Button shopbutton = new Button(15f/17f, 1f/9f, 1f/9f, 1f/9f);
 	
@@ -34,7 +33,7 @@ public class GameDisplayPanel extends JPanel implements MouseListener, KeyListen
 	
 	public void paint(Graphics g)
 	{
-		size = g.getClipBounds();
+		super.paint(g);
 		g.drawImage(Ressource.get("background"), 0, 0, size.width, size.height, null);
 		g.drawImage(Ressource.get("Keks"), size.width / 2, 4 * size.height / 5, size.width / 20, size.height / 10, null);
 		int pw = size.width / 4, ph = size.height / 2;
@@ -67,25 +66,10 @@ public class GameDisplayPanel extends JPanel implements MouseListener, KeyListen
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		
 		if(e.getKeyCode() == KeyEvent.VK_R)
 		{
-			Main.frame.remove(Main.display);
-		    Main.display = new GameDisplayPanel();
-			Main.frame.add(Main.display);
-			Main.frame.removeKeyListener(this);
-			removeMouseListener(this);
-			Main.frame.repaint();
-			Main.frame.setSize(Main.frame.getWidth() + 1, Main.frame.getHeight());
-			Main.frame.setSize(Main.frame.getWidth() - 1, Main.frame.getHeight());
-			
-			
+			Main.changeDisplay(new GameDisplayPanel());
 		}
-	}
-	
-	private boolean checkbutton(Button b, int mx, int my)
-	{
-		return b.bx * size.width < mx && b.by * size.height < my && (b.bx + b.bl) * size.width > mx && (b.by + b.bh) * size.height > my;
 	}
 	
 	@Override 
@@ -94,30 +78,13 @@ public class GameDisplayPanel extends JPanel implements MouseListener, KeyListen
 		if(checkbutton(shopbutton, e.getX(), e.getY())) 
 		{
 			System.out.println("Clicked Shop");
-			Main.frame.remove(Main.display);
-			Main.frame.add(new ShopDisplayPanel());
-			Main.frame.repaint();
-			Main.frame.setSize(Main.frame.getWidth() + 1, Main.frame.getHeight());
-			Main.frame.setSize(Main.frame.getWidth() - 1, Main.frame.getHeight());
+			Main.changeDisplay(new ShopDisplayPanel());
 		}
 	}
 
-	@Override public void keyReleased(KeyEvent arg0) {}
-	@Override public void keyTyped(KeyEvent arg0) {}
-	@Override public void mouseClicked(MouseEvent arg0) {}
-	@Override public void mouseEntered(MouseEvent arg0) {}
-	@Override public void mouseExited(MouseEvent arg0) {}
-	@Override public void mouseReleased(MouseEvent arg0) {}
-
 	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		
+	public void mouseMoved(MouseEvent e) 
+	{
 		speed = (int)Math.sqrt(((lastmousex - e.getX()) * (lastmousex - e.getX())) + (lastmousey - e.getY()) * (lastmousey - e.getY()));
 		lastmousex = e.getX();
 		lastmousey = e.getY();
@@ -136,7 +103,6 @@ public class GameDisplayPanel extends JPanel implements MouseListener, KeyListen
 		    cumList.add(cum);
 		}
 		repaint();
-		
 	}
 }
 

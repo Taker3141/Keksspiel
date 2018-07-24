@@ -2,9 +2,9 @@ package computercamp.Keksspiel;
 
 import java.awt.Image;
 
-public class Player {
-	
-    public Dick dick = new Dick();
+public class Player
+{
+	public Dick dick = new Dick();
 	public String name;
 	public int money;
 	public float px;
@@ -14,8 +14,9 @@ public class Player {
 	private static int pcounter = 0;
 	public final int id;
 	public float distanceFromCookie = -1;
-	
-	public Player(String name, int money, float px, float py, float pw, float ph) {
+
+	public Player(String name, int money, float px, float py, float pw, float ph)
+	{
 		super();
 		this.name = name;
 		this.money = money;
@@ -23,19 +24,16 @@ public class Player {
 		this.py = py;
 		this.pw = pw;
 		this.ph = ph;
-		
+
 		id = pcounter;
 		pcounter++;
 	}
 	
 	
 
-	public Image getTexture() {
+	public Image getTexture()
+	{
 
 		return Ressource.get("player" + id);
 	}
-	
-	
-	
-
 }
