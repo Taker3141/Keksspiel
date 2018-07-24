@@ -6,6 +6,7 @@ public class Player {
 	
     public Dick dick = new Dick();
 	public String name;
+	public int money;
 	public float px;
 	public float py;
 	public float pw;
@@ -14,9 +15,10 @@ public class Player {
 	public final int id;
 	public float distanceFromCookie = -1;
 	
-	public Player(String name, float px, float py, float pw, float ph) {
+	public Player(String name, int money, float px, float py, float pw, float ph) {
 		super();
 		this.name = name;
+		this.money = money;
 		this.px = px;
 		this.py = py;
 		this.pw = pw;

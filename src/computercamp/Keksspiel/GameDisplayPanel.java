@@ -1,5 +1,6 @@
 package computercamp.Keksspiel;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -22,6 +23,7 @@ public class GameDisplayPanel extends JPanel implements MouseListener, KeyListen
 	private List<Cum> cumList = new ArrayList<Cum>();
 	private Rectangle size;
 	private static final float JERK_DURATION = 10000;
+	private Button shopbutton = new Button(15f/17f, 1f/9f, 1f/9f, 1f/9f);
 	
 	public GameDisplayPanel()
 	{
@@ -44,21 +46,53 @@ public class GameDisplayPanel extends JPanel implements MouseListener, KeyListen
 		}
 		for(Cum c : cumList)
 		{
-			g.drawImage(c.getTexture(), (int)(c.px * size.width), (int)(c.py * size.height), (int)(c.w * size.width), (int)(c.h * size.height), null);
+			g.drawImage(c.getTexture(), (int)(c.px * size.width), (int)(c.py * size.height), (int)(c.w * size.width), (int)(c.h * size.height), null);			
 		}
 		if(!came) g.fillRect(10, 10, (int) (barlength * (1 / JERK_DURATION) * size.width), 30);
+		
+		g.drawImage(Ressource.get("Shopbutton"),(int)(shopbutton.bx * size.width), (int)(shopbutton.by * size.height), (int)(shopbutton.bl * size.width), (int)(shopbutton.bh * size.height), null);
+		g.setFont(new Font("Arial",0,14));
+		
+		for (int i = 0; i < Main.player.length; i++) {
+			g.drawString("Player" + (i +1) + " : " + Main.player[i].money , (int) (1f/50f * size.width), (int) (0.2f/2f * size.height * i + 80));
+		}
 	}
-
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		System.out.println("Key Pressed:" + e.getKeyChar());
+		
+		if(e.getKeyCode() == KeyEvent.VK_R)
+		{
+			Main.frame.remove(Main.display);
+		    Main.display = new GameDisplayPanel();
+			Main.frame.add(Main.display);
+			Main.frame.removeKeyListener(this);
+			removeMouseListener(this);
+			Main.frame.repaint();
+			Main.frame.setSize(Main.frame.getWidth() + 1, Main.frame.getHeight());
+			Main.frame.setSize(Main.frame.getWidth() - 1, Main.frame.getHeight());
+			
+			
+		}
+	}
+	
+	private boolean checkbutton(Button b, int mx, int my)
+	{
+		return b.bx * size.width < mx && b.by * size.height < my && (b.bx + b.bl) * size.width > mx && (b.by + b.bh) * size.height > my;
 	}
 	
 	@Override 
 	public void mousePressed(MouseEvent e)
 	{
-		System.out.println("Clicked at " + e.getX() + ", " + e.getY());
+		if(checkbutton(shopbutton, e.getX(), e.getY())) 
+		{
+			System.out.println("Clicked Shop");
+			Main.frame.remove(Main.display);
+			Main.frame.add(new ShopDisplayPanel());
+			Main.frame.repaint();
+			Main.frame.setSize(Main.frame.getWidth() + 1, Main.frame.getHeight());
+			Main.frame.setSize(Main.frame.getWidth() - 1, Main.frame.getHeight());
+		}
 	}
 
 	@Override public void keyReleased(KeyEvent arg0) {}

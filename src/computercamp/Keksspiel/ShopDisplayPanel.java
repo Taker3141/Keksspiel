@@ -2,12 +2,14 @@ package computercamp.Keksspiel;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
-public class ShopDisplayPanel extends JPanel implements MouseListener{
+public class ShopDisplayPanel extends JPanel implements MouseListener, KeyListener{
 	
 	public Button buttonmorecum = new Button(1f/18f, 1f/3f, 1f/6f, 1f/5f);
 	public Button buttonbiggerdick = new Button(6f/18f, 1f/3f, 1f/6f, 1f/5f);
@@ -17,6 +19,7 @@ public class ShopDisplayPanel extends JPanel implements MouseListener{
 	public ShopDisplayPanel() 
 	{
 		addMouseListener(this);	
+		Main.frame.addKeyListener(this);
 	}
 	
 	public void paint(Graphics g)
@@ -48,7 +51,6 @@ public class ShopDisplayPanel extends JPanel implements MouseListener{
 		{
 			System.out.println("Clicked Faster Cum");
 		}
-		
 	}
 
 	@Override
@@ -71,6 +73,36 @@ public class ShopDisplayPanel extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) 
+		{
+			System.out.println("Clicked ESCAPE");
+			Main.frame.remove(Main.display);
+			Main.display = new GameDisplayPanel();
+			Main.frame.add(Main.display);
+			Main.frame.removeKeyListener(this);
+			removeMouseListener(this);
+			Main.frame.repaint();
+			Main.frame.setSize(Main.frame.getWidth() + 1, Main.frame.getHeight());
+			Main.frame.setSize(Main.frame.getWidth() - 1, Main.frame.getHeight());
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
