@@ -2,16 +2,9 @@ package computercamp.Keksspiel;
 
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class GameDisplayPanel extends DisplayPanel
@@ -36,7 +29,6 @@ public class GameDisplayPanel extends DisplayPanel
 		super.paint(g);
 		g.drawImage(Ressource.get("background"), 0, 0, size.width, size.height, null);
 		g.drawImage(Ressource.get("Keks"), size.width / 2, 4 * size.height / 5, size.width / 20, size.height / 10, null);
-		int pw = size.width / 4, ph = size.height / 2;
 		for(int i = 0; i < Main.player.length; i++)
 		{
 			Player p = Main.player[i];
@@ -54,7 +46,7 @@ public class GameDisplayPanel extends DisplayPanel
 			g.drawImage(Ressource.get("jerk_bar_tip"), (int) (barlength * (1 / JERK_DURATION) * size.width) - 60, 10, 60, 60, null);
 		}
 		
-		g.drawImage(Ressource.get("Shopbutton"),(int)(shopbutton.bx * size.width), (int)(shopbutton.by * size.height), (int)(shopbutton.bl * size.width), (int)(shopbutton.bh * size.height), null);
+		if(came) g.drawImage(Ressource.get("Shopbutton"),(int)(shopbutton.bx * size.width), (int)(shopbutton.by * size.height), (int)(shopbutton.bl * size.width), (int)(shopbutton.bh * size.height), null);
 		g.setFont(new Font("Arial",0,14));
 		
 		for (int i = 0; i < Main.player.length; i++) {
@@ -73,7 +65,7 @@ public class GameDisplayPanel extends DisplayPanel
 	@Override 
 	public void mousePressed(MouseEvent e)
 	{
-		if(checkbutton(shopbutton, e.getX(), e.getY())) 
+		if(checkbutton(shopbutton, e.getX(), e.getY()) && came) 
 		{
 			System.out.println("Clicked Shop");
 			Main.changeDisplay(new ShopDisplayPanel());
@@ -95,7 +87,6 @@ public class GameDisplayPanel extends DisplayPanel
 			Main.player[0].distanceFromCookie = (float)Math.sqrt(dx * dx + dy * dy);
 			System.out.println("Distance from Cookie: " + Main.player[0].distanceFromCookie);
 			cumList.add(cum);
-			
 		}
 		repaint();
 	}

@@ -6,6 +6,7 @@ import java.awt.event.*;
 
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class DisplayPanel extends JPanel implements KeyListener, MouseListener, MouseMotionListener
 {
 	public Rectangle size;

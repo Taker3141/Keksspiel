@@ -1,12 +1,9 @@
 package computercamp.Keksspiel;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
+@SuppressWarnings("serial")
 public class ShopDisplayPanel extends DisplayPanel
 {	
 	public Button buttonmorecum = new Button(1f/18f, 1f/3f, 1f/6f, 1f/5f);
