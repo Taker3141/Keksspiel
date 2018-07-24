@@ -1,5 +1,6 @@
 package computercamp.Keksspiel;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.*;
 
@@ -29,6 +30,9 @@ public class ShopDisplayPanel extends DisplayPanel
 		drawItem(g, "penis_bbc", 1f/20f, 1f/2f, 1/6f, 1/6f);
 		drawItem(g, "penis_longschlong", 7f/20f, 1f/2f, 1/6f, 1/6f);
 		drawItem(g, "penis_triangle", 13f/20f, 1f/2f, 1/6f, 1/6f);
+		g.setFont(new Font("Arial",0,26));
+		g.drawString("Coins: 50",(int) (13f/19.7f * size.width), (int) (1f/2.2f * size.height));
+	
 	}
 
 	@Override
@@ -45,6 +49,20 @@ public class ShopDisplayPanel extends DisplayPanel
 		if(checkbutton(buttonfastercum, e.getX(), e.getY())) 
 		{
 			System.out.println("Clicked Faster Cum");
+			
+			//if()
+		}
+		if(checkbutton(buttonbbc, e.getX(), e.getY())) 
+		{
+			System.out.println("Clicked BBC");
+		}
+		if(checkbutton(buttonlongschlong, e.getX(), e.getY())) 
+		{
+			System.out.println("Clicked Longschlong");
+		}
+		if(checkbutton(buttontriangle, e.getX(), e.getY())) 
+		{
+			System.out.println("Clicked triangledick");
 		}
 	}
 

@@ -49,6 +49,8 @@ public class GameDisplayPanel extends DisplayPanel
 		if(came) g.drawImage(Ressource.get("Shopbutton"),(int)(shopbutton.bx * size.width), (int)(shopbutton.by * size.height), (int)(shopbutton.bl * size.width), (int)(shopbutton.bh * size.height), null);
 		g.setFont(new Font("Arial",0,14));
 		
+		
+
 		for (int i = 0; i < Main.player.length; i++) {
 			g.drawString("Player" + (i +1) + " : " + Main.player[i].money , (int) (1f/50f * size.width), (int) (0.2f/2f * size.height * i + 80));
 		}
@@ -87,6 +89,10 @@ public class GameDisplayPanel extends DisplayPanel
 			Main.player[0].distanceFromCookie = (float)Math.sqrt(dx * dx + dy * dy);
 			System.out.println("Distance from Cookie: " + Main.player[0].distanceFromCookie);
 			cumList.add(cum);
+			if(Main.player[0].distanceFromCookie < 0.1) 
+			{
+				Main.player[0].money = Main.player[0].money +50;
+			}
 		}
 		repaint();
 	}
