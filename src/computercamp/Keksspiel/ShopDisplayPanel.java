@@ -14,6 +14,10 @@ public class ShopDisplayPanel extends JPanel implements MouseListener, KeyListen
 	public Button buttonmorecum = new Button(1f/18f, 1f/3f, 1f/6f, 1f/5f);
 	public Button buttonbiggerdick = new Button(6f/18f, 1f/3f, 1f/6f, 1f/5f);
 	public Button buttonfastercum = new Button(12f/19f, 1f/3f, 1f/6f, 1f/5f);
+	public Button buttonbbc = new Button(1f/18f, 2f/3f, 1f/ 6f, 1f/ 5f);
+	public Button buttonlongschlong = new Button(6f/18f, 2f/3f, 1f/6f, 1f/5f);
+	public Button buttontriangle = new Button(12f/19f, 2f/3f, 1f/6f, 1f/5f);
+	
 	private Rectangle size;
 	
 	public ShopDisplayPanel() 
@@ -29,7 +33,14 @@ public class ShopDisplayPanel extends JPanel implements MouseListener, KeyListen
 		g.drawImage(Ressource.get("Button"),(int)(buttonmorecum.bx * size.width), (int)(buttonmorecum.by * size.height), (int)(buttonmorecum.bl * size.width), (int)(buttonmorecum.bh * size.height), null);
 		g.drawImage(Ressource.get("Button"),(int)(buttonbiggerdick.bx * size.width), (int)(buttonbiggerdick.by * size.height), (int)(buttonbiggerdick.bl * size.width), (int)(buttonbiggerdick.bh * size.height), null);
 		g.drawImage(Ressource.get("Button"),(int)(buttonfastercum.bx * size.width), (int)(buttonfastercum.by * size.height), (int)(buttonfastercum.bl * size.width), (int)(buttonfastercum.bh * size.height), null);
-		
+		g.drawImage(Ressource.get("Button"),(int)(buttonbbc.bx * size.width), (int)(buttonbbc.by * size.height), (int)(buttonbbc.bl * size.width), (int)(buttonbbc.bh * size.height), null);
+		g.drawImage(Ressource.get("Button"),(int)(buttonlongschlong.bx * size.width), (int)(buttonlongschlong.by * size.height), (int)(buttonlongschlong.bl * size.width), (int)(buttonlongschlong.bh * size.height), null);
+		g.drawImage(Ressource.get("Button"),(int)(buttontriangle.bx * size.width), (int)(buttontriangle.by * size.height), (int)(buttontriangle.bl * size.width), (int)(buttontriangle.bh * size.height), null);
+		g.drawImage(Ressource.get("penis_bbc"), (int) (1f/20f * size.width), (int) (0.5f/1f * size.height), (int) (1f/6f * size.width), (int) (1f/6f * size.height), null);
+		g.drawImage(Ressource.get("penis_longschlong"), (int) (4f/20f * size.width), (int) (0.5f/1f * size.height), (int) (1f/6f * size.width), (int) (1f/6f * size.height), null);
+		g.drawImage(Ressource.get("penis_triangle"), (int) (13f/20f * size.width), (int) (0.5f/1f * size.height), (int) (1f/6f * size.width), (int) (1f/6f * size.height), null);
+
+	
 	}
 	
 	private boolean checkbutton(Button b, int mx, int my)
