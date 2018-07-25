@@ -33,6 +33,10 @@ public class ShopDisplayPanel extends DisplayPanel
 		g.setFont(new Font("Arial",0,26));
 		g.drawString("Coins: 50",(int) (13f/19.7f * size.width), (int) (1f/2.2f * size.height));
 		g.drawString("Coins: 100",(int) (1f/13f * size.width), (int) (1f/2.2f * size.height));
+		g.drawString("Coins: 250",(int) (1f/2.8f * size.width), (int) (1f/2.2f * size.height));
+		g.drawString("Coins: 20",(int) (1f/2.8f * size.width), (int) (0.8f/1f * size.height));
+		g.drawString("Coins: 20",(int) (1f/1.52f * size.width), (int) (0.8f/1f * size.height));
+		g.drawString("Coins: 20",(int) (1f/13f * size.width), (int) (0.8f/1f * size.height));
 		
 	
 	}
@@ -47,13 +51,22 @@ public class ShopDisplayPanel extends DisplayPanel
 			if(Main.player[0].money >= 100)
 			{
 				Main.player[0].money = Main.player[0].money - 100;	
-				Main.player[0].cum += 0.5;
+				Main.player[0].cum += 0.3;
 			}	
 	    }
 		if(checkbutton(buttonbiggerdick, e.getX(), e.getY())) 
 		{
-			System.out.println("Clicked Bigger Dick");
+			System.out.println("Clicked Bigger Dick");	
 			
+			if(checkbutton(buttonbiggerdick, e.getX(), e.getY())) 
+			{
+				if(Main.player[0].money >= 250 && GameDisplayPanel.JERK_DURATION >= 7000) 
+				{
+					Main.player[0].money = Main.player[0].money - 250;	
+					GameDisplayPanel.JERK_DURATION -= 800;
+					Main.player[0].cum += 0.3;
+				}
+			}
 		}
 		if(checkbutton(buttonfastercum, e.getX(), e.getY())) 
 		{
@@ -71,14 +84,35 @@ public class ShopDisplayPanel extends DisplayPanel
 		if(checkbutton(buttonbbc, e.getX(), e.getY())) 
 		{
 			System.out.println("Clicked BBC");
+			
+			if(checkbutton(buttonbbc, e.getX(), e.getY())) 
+			{
+				if(Main.player[0].money >= 20) 
+				{
+					Main.player[0].money = Main.player[0].money - 20;
+					Main.player[0].dick = new Dick("penis_bbc");
+				}
+			}
 		}
 		if(checkbutton(buttonlongschlong, e.getX(), e.getY())) 
 		{
 			System.out.println("Clicked Longschlong");
+			
+			if(Main.player[0].money >= 20) 
+			{
+				Main.player[0].money = Main.player[0].money - 20;
+				Main.player[0].dick = new Dick("penis_longschlong");
+			}
 		}
 		if(checkbutton(buttontriangle, e.getX(), e.getY())) 
 		{
 			System.out.println("Clicked triangledick");
+			
+			if(Main.player[0].money >= 20) 
+			{
+				Main.player[0].money = Main.player[0].money - 20;
+				Main.player[0].dick = new Dick("penis_triangle");
+			}
 		}
 	}
 
