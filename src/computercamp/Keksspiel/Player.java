@@ -4,7 +4,7 @@ import java.awt.Image;
 
 public class Player
 {
-	public Dick dick = new Dick();
+	public Dick dick = new Dick("penis_basic");
 	public String name;
 	public int money;
 	public float cum = 1;
@@ -30,11 +30,8 @@ public class Player
 		pcounter++;
 	}
 	
-	
-
 	public Image getTexture()
 	{
-
 		return Ressource.get("player" + id);
 	}
 }

@@ -35,6 +35,7 @@ public class GameDisplayPanel extends DisplayPanel
 			Player p = Main.player[i];
 			g.drawImage(p.getTexture(), (int)(p.px * size.width), (int)(p.py * size.height), (int)(p.pw * size.width), (int)(p.ph * size.height), null);
 			g.drawImage(p.dick.getTexture(), (int) ((p.px + p.pw/2) * size.width), (int) ((p.py + p.ph/2) * size.height), (int) (p.dick.dw * size.width * (i < 2 ? 1 : -1)),(int) (p.dick.dh * size.height), null);
+			
 		}
 		for(Cum c : cumList)
 		{
@@ -91,9 +92,17 @@ public class GameDisplayPanel extends DisplayPanel
 			Main.player[0].distanceFromCookie = (float)Math.sqrt(dx * dx + dy * dy);
 			System.out.println("Distance from Cookie: " + Main.player[0].distanceFromCookie);
 			cumList.add(cum);
-			if(Main.player[0].distanceFromCookie < 0.1) 
+			if(Main.player[0].distanceFromCookie < 0.05) 
 			{
-				Main.player[0].money = Main.player[0].money +50;
+				Main.player[0].money = Main.player[0].money +35;
+			}
+			else if(Main.player[0].distanceFromCookie < 0.07) 
+			{
+				Main.player[0].money = Main.player[0].money +20;
+			}
+			else if(Main.player[0].distanceFromCookie < 0.08) 
+			{
+				Main.player[0].money = Main.player[0].money +10;
 			}
 		}
 		repaint();
