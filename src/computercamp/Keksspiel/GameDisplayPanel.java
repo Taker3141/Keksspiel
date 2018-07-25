@@ -15,7 +15,7 @@ public class GameDisplayPanel extends DisplayPanel
 	private int barlength;
 	private boolean came = false;
 	private List<Cum> cumList = new ArrayList<Cum>();
-	private static final float JERK_DURATION = 10000;
+	public static float JERK_DURATION = 10000;
 	private Button shopbutton = new Button(15f/17f, 1f/9f, 1f/9f, 1f/9f);
 	
 	public GameDisplayPanel()
@@ -38,7 +38,7 @@ public class GameDisplayPanel extends DisplayPanel
 		}
 		for(Cum c : cumList)
 		{
-			g.drawImage(c.getTexture(), (int)(c.px * size.width), (int)(c.py * size.height), (int)(c.w * size.width), (int)(c.h * size.height), null);			
+			g.drawImage(c.getTexture(), (int)(c.px * size.width - (c.w * Main.player[0].cum / 2)), (int)(c.py * size.height - (c.h * Main.player[0].cum / 2)), (int)(c.w * size.width * Main.player[0].cum), (int)(c.h * size.height * Main.player[0].cum), null);			
 		}
 		if(!came) 
 		{
@@ -86,8 +86,6 @@ public class GameDisplayPanel extends DisplayPanel
 		{
 			came = true;
 			Cum cum = new Cum(((float)e.getX()) / (float)size.width, ((float)e.getY()) / (float)size.height);
-			cum.px -= cum.w / 2;
-			cum.py -= cum.h / 2;
 			float dx = cum.px - 1f/2f, dy = cum.py - 4f/5f;
 			calculateDistance(cum, 1f/2f, 4f/5f);
 			Main.player[0].distanceFromCookie = (float)Math.sqrt(dx * dx + dy * dy);
