@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SuppressWarnings("serial")
@@ -38,7 +39,7 @@ public class GameDisplayPanel extends DisplayPanel
 		}
 		for(Cum c : cumList)
 		{
-			g.drawImage(c.getTexture(), (int)(c.px * size.width) - (int)(c.w * size.width * 0.5f * Main.player[0].cum), (int)(c.py * size.height) - (int)(c.h * size.height * 0.5f * Main.player[0].cum), (int)(c.w * size.width * Main.player[0].cum), (int)(c.h * size.height * Main.player[0].cum), null);			
+			g.drawImage(c.getTexture(), (int)(c.px * size.width - (c.w * Main.player[0].cum / 2)), (int)(c.py * size.height - (c.h * Main.player[0].cum / 2)), (int)(c.w * size.width * Main.player[0].cum), (int)(c.h * size.height * Main.player[0].cum), null);			
 		}
 		if(!came) 
 		{
@@ -87,6 +88,7 @@ public class GameDisplayPanel extends DisplayPanel
 			came = true;
 			Cum cum = new Cum(((float)e.getX()) / (float)size.width, ((float)e.getY()) / (float)size.height);
 			float dx = cum.px - 1f/2f, dy = cum.py - 4f/5f;
+			calculateDistance(cum, 1f/2f, 4f/5f);
 			Main.player[0].distanceFromCookie = (float)Math.sqrt(dx * dx + dy * dy);
 			System.out.println("Distance from Cookie: " + Main.player[0].distanceFromCookie);
 			cumList.add(cum);
@@ -104,6 +106,21 @@ public class GameDisplayPanel extends DisplayPanel
 			}
 		}
 		repaint();
+	}
+	
+	private float calculateDistance(Cum cum, float cookieX, float cookieY)
+	{
+		float[] list = new float[4];
+		float dx = cum.px - cookieX, dy = cum.py - cookieY;
+		list[0] = (float)Math.sqrt(dx * dx + dy * dy);
+		dx = (cum.px + cum.w) - cookieX; dy = cum.py - cookieY;
+		list[1] = (float)Math.sqrt(dx * dx + dy * dy);
+		dx = cum.px - cookieX; dy = (cum.py + cum.h) - cookieY;
+		list[2] = (float)Math.sqrt(dx * dx + dy * dy);
+		dx = (cum.px + cum.w) - cookieX; dy = (cum.py - cum.h) - cookieY;
+		list[3] = (float)Math.sqrt(dx * dx + dy * dy);
+		Arrays.sort(list);
+		return list[3];
 	}
 }
 
