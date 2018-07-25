@@ -1,4 +1,4 @@
-package computercamp.Keksspiel;
+package computercamp.Keksspiel.client;
 
 public class Shop {
 	

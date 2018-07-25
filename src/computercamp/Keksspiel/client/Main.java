@@ -1,6 +1,8 @@
-package computercamp.Keksspiel;
+package computercamp.Keksspiel.client;
 
 import javax.swing.JFrame;
+
+import computercamp.Keksspiel.server.Player;
 
 public class Main
 {
@@ -9,12 +11,7 @@ public class Main
 	public static Player[] player = new Player[4];
 	
 	public static void main(String[] args)
-	{
-		player[0] = new Player("", 0,1f/10f , 1f/3f, 1f/4f, 1f/2f);
-		player[1] = new Player("",0, 2f/10f , 1f/3f, 1f/4f, 1f/2f);
-		player[2] = new Player("",0, 6f/10f , 1f/3f, 1f/4f, 1f/2f);
-		player[3] = new Player("",0, 7f/10f , 1f/3f, 1f/4f, 1f/2f);
-		
+	{		
 		frame = new JFrame("Keksspiel");
 		frame.setSize(1024, 512);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

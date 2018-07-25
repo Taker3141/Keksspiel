@@ -1,4 +1,4 @@
-package computercamp.Keksspiel;
+package computercamp.Keksspiel.client;
 
 import java.awt.Image;
 

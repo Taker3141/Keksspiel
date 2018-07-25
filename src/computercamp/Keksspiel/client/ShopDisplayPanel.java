@@ -1,4 +1,4 @@
-package computercamp.Keksspiel;
+package computercamp.Keksspiel.client;
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -51,7 +51,7 @@ public class ShopDisplayPanel extends DisplayPanel
 			if(Main.player[0].money >= 100)
 			{
 				Main.player[0].money = Main.player[0].money - 100;	
-				Main.player[0].cum += 0.3;
+				Main.player[0].cumSize += 0.3;
 			}	
 	    }
 		if(checkbutton(buttonbiggerdick, e.getX(), e.getY())) 
@@ -60,11 +60,11 @@ public class ShopDisplayPanel extends DisplayPanel
 			
 			if(checkbutton(buttonbiggerdick, e.getX(), e.getY())) 
 			{
-				if(Main.player[0].money >= 250 && GameDisplayPanel.JERK_DURATION >= 7000) 
+				if(Main.player[0].money >= 250 && Main.player[0].jerkDuration >= 7000) 
 				{
 					Main.player[0].money = Main.player[0].money - 250;	
-					GameDisplayPanel.JERK_DURATION -= 800;
-					Main.player[0].cum += 0.3;
+					Main.player[0].jerkDuration -= 800;
+					Main.player[0].cumSize += 0.3;
 				}
 			}
 		}
@@ -74,10 +74,10 @@ public class ShopDisplayPanel extends DisplayPanel
 			
 			if(checkbutton(buttonfastercum, e.getX(), e.getY()))
 			{
-				if(Main.player[0].money >= 50 && GameDisplayPanel.JERK_DURATION >= 7000)
+				if(Main.player[0].money >= 50 && Main.player[0].jerkDuration >= 7000)
 				{
 					Main.player[0].money = Main.player[0].money - 50;	
-					GameDisplayPanel.JERK_DURATION -= 1000;
+					Main.player[0].jerkDuration -= 1000;
 				}	
 			}
 		}
