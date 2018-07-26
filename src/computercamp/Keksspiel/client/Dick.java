@@ -8,19 +8,17 @@ public class Dick {
 	public float dw = 1f / 20f;
 	public float dh = 1f / 10f;
 	Color color = new Color(0);
-	private Image texture;
-	
-	public Image getTexture() 
-	{
-		
-		return texture;
-	}
+	private final Image texture;
+	public final String name;
 	
 	public Dick(String texturename) 
 	{
 		texture = Ressource.get(texturename);
+		name = texturename;
 	}
 	
-	
-
+	public Image getTexture() 
+	{
+		return texture;
+	}
 }

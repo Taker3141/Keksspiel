@@ -7,12 +7,15 @@ import java.util.*;
 
 public class KeksspielServer
 {
+	public static Game game = new Game();
+	private static List<ServerThread> threadList;
+	
 	public static void main(String[] args)
 	{
 		ServerSocket serverSocket = null;
 		try
 		{
-			List<ServerThread> threadList = new ArrayList<ServerThread>();
+			threadList = new ArrayList<ServerThread>();
 			serverSocket = new ServerSocket(10000);
 			System.out.println("Keksspiel Server running");
 			while(true)
@@ -38,5 +41,13 @@ public class KeksspielServer
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public static void checkReady()
+	{
+		boolean ready = true;
+		for(Player p : game.players) if(p != null) ready &= p.ready;
+		if(ready) for(ServerThread thread : threadList) thread.sendStart();
+		System.out.println("Started Game!");
 	}
 }

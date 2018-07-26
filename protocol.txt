@@ -1,0 +1,22 @@
+//Initialisation
+C: add <player_name>
+S: ok / full / duplicate
+
+//Start game
+C: ready
+S: ok
+
+//Game ready
+S: start
+
+//Get Player Info
+C: player <player_ID>
+S: id <player_ID>
+   name <player_name>
+   money <money>
+   cum_size <cum_size>
+   jerk <jerk_duration>
+   came <came>
+   dick <dick_name>
+   
+

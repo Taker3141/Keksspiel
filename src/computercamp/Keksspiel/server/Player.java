@@ -11,7 +11,7 @@ public class Player
 {
 	public Dick dick = new Dick("penis_basic");
 	public String name;
-	public int money;
+	public int money = 0;
 	public float cumSize = 1;
 	public float px, py, pw, ph;
 	public final int id;
@@ -19,22 +19,23 @@ public class Player
 	public boolean came = false;
 	public int jerkDuration = 10000;
 	public Game game;
+	public boolean ready = false;
 	
-	private static int pcounter = 0;
+	public static int pcounter = 0;
+	public static final float[] X_POSITION = {1f/10f, 2f/10f, 6f/10f, 7f/10f};
 
-	public Player(String name, int money, float px, float py, float pw, float ph, Game g)
+	public Player(String name, Game g)
 	{
 		super();
-		this.name = name;
-		this.money = money;
-		this.px = px;
-		this.py = py;
-		this.pw = pw;
-		this.ph = ph;
-		this.game = g;
-
 		id = pcounter;
 		pcounter++;
+		this.name = name;
+		this.px = X_POSITION[id];
+		this.py = 1f/3f;
+		this.pw = 1f/4f;
+		this.ph = 1f/2f;
+		this.game = g;
+		game.players[id] = this;
 	}
 	
 	public void cum(float cumX, float cumY)

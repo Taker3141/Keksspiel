@@ -7,11 +7,11 @@ import computercamp.Keksspiel.client.Cum;
 
 public class Game
 {
-	public Player[] players;
+	public Player[] players = new Player[4];
 	public List<Cum> cumList = new ArrayList<Cum>();
 	
-	public Game(Player[] players)
+	public Game()
 	{
-		this.players = players;
+		
 	}
 }
