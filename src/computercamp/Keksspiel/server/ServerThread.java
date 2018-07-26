@@ -70,13 +70,15 @@ public class ServerThread extends Thread
 						out.println("name " + p.name);
 						out.println("money " + p.money);
 						out.println("cum_size " + p.cumSize);
-						out.println("jerk " + p.jerkDuration);
+						out.println("jerk_duration " + p.jerkDuration);
+						out.println("jerk " + p.jerk);
 						out.println("came " + p.came);
 						out.println("dick " + p.dick.name);
 						break;
 				}
 			}
 			println("Connection closed");
+			KeksspielServer.threadList.remove(this);
 			socket.close();
 			in.close();
 			out.close();

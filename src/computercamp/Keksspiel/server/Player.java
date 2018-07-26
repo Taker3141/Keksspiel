@@ -1,11 +1,10 @@
 package computercamp.Keksspiel.server;
 
-import java.awt.Image;
+
 import java.util.Arrays;
 
 import computercamp.Keksspiel.client.Cum;
 import computercamp.Keksspiel.client.Dick;
-import computercamp.Keksspiel.client.Ressource;
 
 public class Player
 {
@@ -13,16 +12,15 @@ public class Player
 	public String name;
 	public int money = 0;
 	public float cumSize = 1;
-	public float px, py, pw, ph;
 	public final int id;
 	public float distanceFromCookie = -1;
 	public boolean came = false;
 	public int jerkDuration = 10000;
+	public int jerk = 0;
 	public Game game;
 	public boolean ready = false;
 	
 	public static int pcounter = 0;
-	public static final float[] X_POSITION = {1f/10f, 2f/10f, 6f/10f, 7f/10f};
 
 	public Player(String name, Game g)
 	{
@@ -30,10 +28,6 @@ public class Player
 		id = pcounter;
 		pcounter++;
 		this.name = name;
-		this.px = X_POSITION[id];
-		this.py = 1f/3f;
-		this.pw = 1f/4f;
-		this.ph = 1f/2f;
 		this.game = g;
 		game.players[id] = this;
 	}
@@ -63,10 +57,5 @@ public class Player
 		list[3] = (float)Math.sqrt(dx * dx + dy * dy);
 		Arrays.sort(list);
 		return list[3];
-	}
-	
-	public Image getTexture()
-	{
-		return Ressource.get("player" + id);
 	}
 }

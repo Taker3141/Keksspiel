@@ -2,23 +2,26 @@ package computercamp.Keksspiel.client;
 
 import javax.swing.JFrame;
 
-import computercamp.Keksspiel.server.Player;
-
 public class Main
 {
 	public static JFrame frame;
 	public static DisplayPanel display;
-	public static Player[] player = new Player[4];
+	public static GameDisplayPanel gameDisplay;
+	public static ClientPlayer[] player = new ClientPlayer[4];
 	
 	public static void main(String[] args)
 	{		
 		frame = new JFrame("Keksspiel");
 		frame.setSize(1024, 512);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		display = new GameDisplayPanel();
+		display = gameDisplay = new GameDisplayPanel();
 		frame.add(display);
 		frame.setVisible(true);
 		
+		player[0] = new ClientPlayer("", 0, gameDisplay);
+		player[1] = new ClientPlayer("", 1, gameDisplay);
+		player[2] = new ClientPlayer("", 2, gameDisplay);
+		player[3] = new ClientPlayer("", 3, gameDisplay);
 	}
 	
 	public static void changeDisplay(DisplayPanel newDisplay)

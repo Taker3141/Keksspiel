@@ -8,7 +8,7 @@ import java.util.*;
 public class KeksspielServer
 {
 	public static Game game = new Game();
-	private static List<ServerThread> threadList;
+	public static List<ServerThread> threadList;
 	
 	public static void main(String[] args)
 	{

@@ -15,7 +15,8 @@ S: id <player_ID>
    name <player_name>
    money <money>
    cum_size <cum_size>
-   jerk <jerk_duration>
+   jerk_duration <jerk_duration>
+   jerk <jerk>
    came <came>
    dick <dick_name>
    
