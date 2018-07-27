@@ -49,6 +49,7 @@ public class KeksspielServer
 		boolean ready = true;
 		for(Player p : game.players) if(p != null) ready &= p.ready;
 		if(ready) for(ServerThread thread : threadList) thread.sendStart();
+		else return;
 		gameStarted = true;
 		System.out.println("Started Game!");
 	}
