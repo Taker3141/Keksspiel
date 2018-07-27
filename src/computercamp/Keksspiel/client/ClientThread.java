@@ -4,22 +4,33 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class ClientThread extends Thread
 {
 	private Socket socket;
 	private PrintWriter out;
 	private BufferedReader in;
+	private boolean finished = false;
 	
-	public ClientThread(Socket serverSocket)
+	public ClientThread(InetAddress serverAddress) throws SocketException
 	{
+		Socket serverSocket = null;
 		try
 		{
+			serverSocket = new Socket(serverAddress, 10000);
+			System.out.println("Keksspiel Client running");
+
 			socket = serverSocket;
 			System.out.println("Connected to server");
 			out = new PrintWriter(socket.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		}
+		catch(SocketException e1)
+		{
+			throw e1;
 		}
 		catch(Exception e)
 		{
@@ -31,10 +42,15 @@ public class ClientThread extends Thread
 	public void run()
 	{
 		registerPlayer();
-		while(true) try
+		try
 		{
-			syncPlayers();
-			sleep(500);
+			while(!in.readLine().equals("start"));
+			KeksspielClient.changeDisplay(KeksspielClient.gameDisplay);
+			while(!finished)
+			{
+				syncPlayers();
+				sleep(500);
+			}
 		}
 		catch(Exception e) {}
 	}
@@ -56,6 +72,11 @@ public class ClientThread extends Thread
 	public synchronized void reportJerk(int speed, float mouseX, float mouseY)
 	{
 		out.println("jerk " + speed + " " + mouseX + " " + mouseY);
+	}
+	
+	public synchronized void reportReady()
+	{
+		out.println("ready");
 	}
 	
 	public synchronized void syncPlayers()

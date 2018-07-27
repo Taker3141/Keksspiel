@@ -14,6 +14,7 @@ public class DisplayPanel extends JPanel implements KeyListener, MouseListener, 
 	@Override
 	public void paint(Graphics g)
 	{
+		super.paint(g);
 		size = g.getClipBounds();
 	}
 	

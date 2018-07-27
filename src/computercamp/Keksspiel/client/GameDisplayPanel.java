@@ -3,10 +3,6 @@ package computercamp.Keksspiel.client;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import computercamp.Keksspiel.server.Cum;
 
 @SuppressWarnings("serial")
 public class GameDisplayPanel extends DisplayPanel

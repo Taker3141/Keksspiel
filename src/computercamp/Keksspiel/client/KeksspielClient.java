@@ -8,9 +8,9 @@ import javax.swing.JFrame;
 
 public class KeksspielClient
 {
-	private static boolean finished = false;
 	public static JFrame frame;
 	public static DisplayPanel display;
+	public static MenuDisplayPanel menu;
 	public static GameDisplayPanel gameDisplay;
 	public static ClientPlayer[] player = new ClientPlayer[4];
 	public static ClientThread networkThread;
@@ -20,36 +20,18 @@ public class KeksspielClient
 		frame = new JFrame("Keksspiel");
 		frame.setSize(1024, 512);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		display = gameDisplay = new GameDisplayPanel();
+		gameDisplay = new GameDisplayPanel();
+		menu = new MenuDisplayPanel();
+		display = menu;
 		frame.add(display);
 		frame.setVisible(true);
 		
 		for(int i = 0; i < 4; i++) player[i] = new ClientPlayer(i, gameDisplay);
+	}
+	
+	public static void connetToServer()
+	{
 		
-		Socket serverSocket = null;
-		try
-		{
-			serverSocket = new Socket(InetAddress.getByAddress(new byte[]{127, 0, 0, 1}), 10000);
-			System.out.println("Keksspiel Client running");
-			networkThread = new ClientThread(serverSocket);
-			networkThread.start();
-		}
-		catch(Exception e) 
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			while(!finished) try {Thread.sleep(1000);} catch(Exception e) {}
-			if(serverSocket != null) try
-			{
-				serverSocket.close();
-			} 
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
 	}
 	
 	public static void changeDisplay(DisplayPanel newDisplay)
