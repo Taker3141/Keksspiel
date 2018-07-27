@@ -1,6 +1,8 @@
-package computercamp.Keksspiel.client;
+package computercamp.Keksspiel.server;
 
 import java.awt.Image;
+
+import computercamp.Keksspiel.client.Ressource;
 
 public class Cum
 {

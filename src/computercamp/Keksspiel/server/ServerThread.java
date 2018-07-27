@@ -43,10 +43,11 @@ public class ServerThread extends Thread
 				{
 					case "add": 
 						if(player != null) out.println("duplicate");
+						if(KeksspielServer.gameStarted) out.println("no");
 						else if(Player.pcounter < 4) 
 						{
 							player = new Player(arg(frag, 1), KeksspielServer.game);
-							out.println("ok");
+							out.println("ok " + player.id);
 							println("Added player " + player.id + ": " + arg(frag, 1));
 						}
 						else out.println("full");
@@ -73,20 +74,22 @@ public class ServerThread extends Thread
 						out.println("jerk_duration " + p.jerkDuration);
 						out.println("jerk " + p.jerk);
 						out.println("came " + p.came);
+						if(p.cum != null) out.println("cum " + p.cum.px + " " + p.cum.py);
 						out.println("dick " + p.dick.name);
 						out.println("end");
 						break;
 					case "jerk":
 						int v;
 						float mx, my;
+						if(player.came) break;
 						try
 						{
 							v = Integer.parseInt(arg(frag, 1));
 							mx = Float.parseFloat(arg(frag, 2));
 							my = Float.parseFloat(arg(frag, 3));
 							player.jerk += v;
-							if(player.jerk > player.jerkDuration) player.cum(mx, my);
 							out.println("ok");
+							if(player.jerk > player.jerkDuration) player.cum(mx, my);
 						} 
 						catch(Exception e) {v = (int)(mx = my = -1);}
 						break;

@@ -6,12 +6,13 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import computercamp.Keksspiel.server.Cum;
+
 @SuppressWarnings("serial")
 public class GameDisplayPanel extends DisplayPanel
 {
 	private int lastmousex, lastmousey;
 	private int speed;
-	public List<Cum> cumList = new ArrayList<Cum>();
 	private Button shopbutton = new Button(15f/17f, 1f/9f, 1f/9f, 1f/9f);
 	public ClientPlayer player = new ClientPlayer(0, KeksspielClient.gameDisplay);
 	
@@ -33,11 +34,7 @@ public class GameDisplayPanel extends DisplayPanel
 			ClientPlayer p = KeksspielClient.player[i];
 			g.drawImage(p.getTexture(), (int)(p.px * size.width), (int)(p.py * size.height), (int)(p.pw * size.width), (int)(p.ph * size.height), null);
 			g.drawImage(p.dick.getTexture(), (int) ((p.px + p.pw/2) * size.width), (int) ((p.py + p.ph/2) * size.height), (int) (p.dick.dw * size.width * (i < 2 ? 1 : -1)),(int) (p.dick.dh * size.height), null);
-			
-		}
-		for(Cum c : cumList)
-		{
-			g.drawImage(c.getTexture(), (int)(c.px * size.width - (c.w * player.cumSize / 2)), (int)(c.py * size.height - (c.h * player.cumSize / 2)), (int)(c.w * size.width * player.cumSize), (int)(c.h * size.height * player.cumSize), null);			
+			g.drawImage(Ressource.get("cum"), (int)(p.cumX * size.width - (size.width * p.cumSize / 2)), (int)(p.cumY * size.height - (size.height * player.cumSize)), (int)(size.width * player.cumSize), (int)(size.height * player.cumSize * 2), null);			
 		}
 		if(!player.came) 
 		{
@@ -78,11 +75,13 @@ public class GameDisplayPanel extends DisplayPanel
 	@Override
 	public void mouseMoved(MouseEvent e) 
 	{
+		if(player.came) return;
 		speed = (int)Math.sqrt(((lastmousex - e.getX()) * (lastmousex - e.getX())) + (lastmousey - e.getY()) * (lastmousey - e.getY()));
 		lastmousex = e.getX();
 		lastmousey = e.getY();
 		player.jerk += speed;
 		repaint();
+		KeksspielClient.networkThread.reportJerk(speed, ((float)lastmousex) / size.width, ((float)lastmousey) / size.height);
 	}
 }
 

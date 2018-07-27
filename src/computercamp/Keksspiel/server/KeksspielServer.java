@@ -9,6 +9,7 @@ public class KeksspielServer
 {
 	public static Game game = new Game();
 	public static List<ServerThread> threadList;
+	public static boolean gameStarted = false;
 	
 	public static void main(String[] args)
 	{
@@ -48,6 +49,7 @@ public class KeksspielServer
 		boolean ready = true;
 		for(Player p : game.players) if(p != null) ready &= p.ready;
 		if(ready) for(ServerThread thread : threadList) thread.sendStart();
+		gameStarted = true;
 		System.out.println("Started Game!");
 	}
 }

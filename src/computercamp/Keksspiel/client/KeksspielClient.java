@@ -24,6 +24,8 @@ public class KeksspielClient
 		frame.add(display);
 		frame.setVisible(true);
 		
+		for(int i = 0; i < 4; i++) player[i] = new ClientPlayer(i, gameDisplay);
+		
 		Socket serverSocket = null;
 		try
 		{

@@ -3,7 +3,6 @@ package computercamp.Keksspiel.server;
 
 import java.util.Arrays;
 
-import computercamp.Keksspiel.client.Cum;
 import computercamp.Keksspiel.client.Dick;
 
 public class Player
@@ -11,7 +10,7 @@ public class Player
 	public Dick dick = new Dick("penis_basic");
 	public String name;
 	public int money = 0;
-	public float cumSize = 1;
+	public float cumSize = 1f/20f;
 	public final int id;
 	public float distanceFromCookie = -1;
 	public boolean came = false;
@@ -19,6 +18,7 @@ public class Player
 	public int jerk = 0;
 	public Game game;
 	public boolean ready = false;
+	public Cum cum;
 	
 	public static int pcounter = 0;
 
@@ -35,8 +35,8 @@ public class Player
 	public void cum(float cumX, float cumY)
 	{
 		came = true;
-		Cum cum = new Cum(cumX, cumY, cumSize);
-		distanceFromCookie = calculateDistance(cum, 1f/2f, 4f/5f);
+		cum = new Cum(cumX, cumY, cumSize);
+		distanceFromCookie = calculateDistance(1f/2f, 4f/5f);
 		System.out.println("Distance from Cookie: " + distanceFromCookie);
 		game.cumList.add(cum);
 		if(distanceFromCookie < 0.05) money += 35;
@@ -45,7 +45,7 @@ public class Player
 		System.out.println(name + " came!");
 	}
 	
-	private static float calculateDistance(Cum cum, float cookieX, float cookieY)
+	private float calculateDistance(float cookieX, float cookieY)
 	{
 		float[] list = new float[4];
 		float dx = cum.px - cookieX, dy = cum.py - cookieY;

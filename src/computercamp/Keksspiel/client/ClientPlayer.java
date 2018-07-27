@@ -9,7 +9,8 @@ public class ClientPlayer
 	public Dick dick = new Dick("penis_basic");
 	public String name;
 	public int money = 0;
-	public float cumSize = 1;
+	public float cumSize = 1f/20f;
+	public float cumX = -1, cumY = -1;
 	public float px, py, pw, ph;
 	public final int id;
 	public float distanceFromCookie = -1;

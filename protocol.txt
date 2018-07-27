@@ -4,7 +4,7 @@ S: ok / full / duplicate
 
 //Start game
 C: ready
-S: ok
+S: ok <player_ID>
 
 //Game ready
 S: start
@@ -18,9 +18,11 @@ S: id <player_ID>
    jerk_duration <jerk_duration>
    jerk <jerk>
    came <came>
+   cum <cumX> <cumY>
    dick <dick_name>
    end
    
 //Report jerking
 C: jerk <velocity> <mouseX> <mouseY>
 S: ok
+
