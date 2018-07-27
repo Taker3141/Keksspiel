@@ -15,6 +15,7 @@ public class ShopDisplayPanel extends DisplayPanel
 	public Button buttontriangle = new Button(12f/19f, 2f/3f, 1f/6f, 1f/5f);
 	public Button[] buttons;
 	
+	
 	public ShopDisplayPanel() 
 	{
 		addMouseListener(this);	

@@ -63,7 +63,7 @@ public class GameDisplayPanel extends DisplayPanel
 		if(e.getKeyCode() == KeyEvent.VK_R)
 		{
 			Main.changeDisplay(new GameDisplayPanel());
-		}
+		}		
 	}
 	
 	@Override 
@@ -103,6 +103,10 @@ public class GameDisplayPanel extends DisplayPanel
 			else if(Main.player[0].distanceFromCookie < 0.08) 
 			{
 				Main.player[0].money = Main.player[0].money +10;
+			}
+			else if(Main.player[0].money >= 10 && Main.player[0].distanceFromCookie > 0.09) 
+			{
+				Main.player[0].money = Main.player[0].money - 10;
 			}
 		}
 		repaint();

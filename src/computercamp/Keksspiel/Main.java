@@ -7,6 +7,7 @@ public class Main
 	public static JFrame frame;
 	public static DisplayPanel display;
 	public static Player[] player = new Player[4];
+	public static MenuDisplayPanel menu;
 	
 	public static void main(String[] args)
 	{
@@ -18,16 +19,17 @@ public class Main
 		frame = new JFrame("Keksspiel");
 		frame.setSize(1024, 512);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		display = new GameDisplayPanel();
+		display = new MenuDisplayPanel();
 		frame.add(display);
 		frame.setVisible(true);
-		
+		menu = new MenuDisplayPanel();
 	}
 	
 	public static void changeDisplay(DisplayPanel newDisplay)
 	{
 		frame.remove(display);
 		frame.removeKeyListener(display);
+		
 		display = newDisplay;
 		frame.add(display);
 		frame.addKeyListener(display);
