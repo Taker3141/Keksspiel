@@ -29,7 +29,7 @@ public class MenuDisplayPanel extends DisplayPanel{
 	
 	public Button start = new Button(1f/19.8f, 1f/1.4f, 1f/6f, 1f/5f);
 	public Button multiplayer = new Button(1f/2.5f, 1f/1.4f, 1f/6f, 1f/5f);
-	public Button hilfe = new Button(1f/1.38f, 1f/1.4f, 1f/6f, 1f/5f);
+	public Button hilfe = new Button(1f/1.38f, 1f/1.4f, 2f/6f, 2f/5f);
 	
 	public void paint(Graphics g)
 	{
