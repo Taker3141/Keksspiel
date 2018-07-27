@@ -20,9 +20,9 @@ public class ServerThread extends Thread
 		try
 		{
 			socket = clientSocket;
-			System.out.println("Thread" + threadNumber + ": New connection on port " + socket.getPort() + " to " + clientSocket.getInetAddress());
+			println("New connection on port " + socket.getPort() + " to " + clientSocket.getInetAddress());
 			out = new PrintWriter(socket.getOutputStream(), true);
-			in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		}
 		catch(Exception e)
 		{
@@ -65,8 +65,8 @@ public class ServerThread extends Thread
 						try {id = Integer.parseInt(arg(frag, 1));} catch(Exception e) {id = -1;}
 						if(id < 0 || id >= 4) {out.println("null"); break;}
 						Player p = KeksspielServer.game.players[id];
+						out.println("id " + id);
 						if(p == null) {out.println("null"); break;}
-						out.println("id " + p.id);
 						out.println("name " + p.name);
 						out.println("money " + p.money);
 						out.println("cum_size " + p.cumSize);
@@ -74,7 +74,26 @@ public class ServerThread extends Thread
 						out.println("jerk " + p.jerk);
 						out.println("came " + p.came);
 						out.println("dick " + p.dick.name);
+						out.println("end");
 						break;
+					case "jerk":
+						int v;
+						float mx, my;
+						try
+						{
+							v = Integer.parseInt(arg(frag, 1));
+							mx = Float.parseFloat(arg(frag, 2));
+							my = Float.parseFloat(arg(frag, 3));
+							player.jerk += v;
+							if(player.jerk > player.jerkDuration) player.cum(mx, my);
+							out.println("ok");
+						} 
+						catch(Exception e) {v = (int)(mx = my = -1);}
+						break;
+					default: 
+							out.println("unknown " + inputLine);
+							System.out.println("Unknown command: " + inputLine);
+							break;
 				}
 			}
 			println("Connection closed");
@@ -85,6 +104,7 @@ public class ServerThread extends Thread
 		} 
 		catch (Exception e)
 		{
+			println("Oh no, this thread crashed :(");
 			e.printStackTrace();
 		}
 	}
@@ -97,7 +117,7 @@ public class ServerThread extends Thread
 	
 	private void println(String message)
 	{
-		System.out.println("Thread" + threadNumber + ": " + message);
+		System.out.println("Thread " + threadNumber + ": " + message);
 	}
 
 	public void sendStart()

@@ -19,5 +19,8 @@ S: id <player_ID>
    jerk <jerk>
    came <came>
    dick <dick_name>
+   end
    
-
+//Report jerking
+C: jerk <velocity> <mouseX> <mouseY>
+S: ok

@@ -42,6 +42,7 @@ public class Player
 		if(distanceFromCookie < 0.05) money += 35;
 		else if(distanceFromCookie < 0.07) money += 20;
 		else if(distanceFromCookie < 0.08) money += 10;
+		System.out.println(name + " came!");
 	}
 	
 	private static float calculateDistance(Cum cum, float cookieX, float cookieY)

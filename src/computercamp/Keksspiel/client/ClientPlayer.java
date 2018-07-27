@@ -22,10 +22,9 @@ public class ClientPlayer
 	public static int pcounter = 0;
 	public static final float[] X_POSITION = {1f/10f, 2f/10f, 6f/10f, 7f/10f};
 
-	public ClientPlayer(String name, int id, GameDisplayPanel display)
+	public ClientPlayer(int id, GameDisplayPanel display)
 	{
 		this.id = id;
-		this.name = name;
 		this.px = X_POSITION[id];
 		this.py = 1f/3f;
 		this.pw = 1f/4f;

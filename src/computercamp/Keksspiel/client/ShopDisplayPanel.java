@@ -14,11 +14,13 @@ public class ShopDisplayPanel extends DisplayPanel
 	public Button buttonlongschlong = new Button(6f/18f, 2f/3f, 1f/6f, 1f/5f);
 	public Button buttontriangle = new Button(12f/19f, 2f/3f, 1f/6f, 1f/5f);
 	public Button[] buttons;
+	public final ClientPlayer player;
 	
-	public ShopDisplayPanel() 
+	public ShopDisplayPanel(ClientPlayer player) 
 	{
+		this.player = player;
 		addMouseListener(this);	
-		Main.frame.addKeyListener(this);
+		KeksspielClient.frame.addKeyListener(this);
 		buttons = new Button[] {buttonmorecum, buttonbiggerdick, buttonfastercum, buttonbbc, buttonlongschlong, buttontriangle};
 	}
 	
@@ -37,8 +39,6 @@ public class ShopDisplayPanel extends DisplayPanel
 		g.drawString("Coins: 20",(int) (1f/2.8f * size.width), (int) (0.8f/1f * size.height));
 		g.drawString("Coins: 20",(int) (1f/1.52f * size.width), (int) (0.8f/1f * size.height));
 		g.drawString("Coins: 20",(int) (1f/13f * size.width), (int) (0.8f/1f * size.height));
-		
-	
 	}
 
 	@Override
@@ -48,10 +48,10 @@ public class ShopDisplayPanel extends DisplayPanel
 		{
 			System.out.println("Clicked More Cum");
 			
-			if(Main.player[0].money >= 100)
+			if(player.money >= 100)
 			{
-				Main.player[0].money = Main.player[0].money - 100;	
-				Main.player[0].cumSize += 0.3;
+				player.money -= 100;	
+				player.cumSize += 0.3;
 			}	
 	    }
 		if(checkbutton(buttonbiggerdick, e.getX(), e.getY())) 
@@ -60,11 +60,11 @@ public class ShopDisplayPanel extends DisplayPanel
 			
 			if(checkbutton(buttonbiggerdick, e.getX(), e.getY())) 
 			{
-				if(Main.player[0].money >= 250 && Main.player[0].jerkDuration >= 7000) 
+				if(player.money >= 250 && player.jerkDuration >= 7000) 
 				{
-					Main.player[0].money = Main.player[0].money - 250;	
-					Main.player[0].jerkDuration -= 800;
-					Main.player[0].cumSize += 0.3;
+					player.money -= 250;	
+					player.jerkDuration -= 800;
+					player.cumSize += 0.3;
 				}
 			}
 		}
@@ -74,10 +74,10 @@ public class ShopDisplayPanel extends DisplayPanel
 			
 			if(checkbutton(buttonfastercum, e.getX(), e.getY()))
 			{
-				if(Main.player[0].money >= 50 && Main.player[0].jerkDuration >= 7000)
+				if(player.money >= 50 && player.jerkDuration >= 7000)
 				{
-					Main.player[0].money = Main.player[0].money - 50;	
-					Main.player[0].jerkDuration -= 1000;
+					player.money -= 50;	
+					player.jerkDuration -= 1000;
 				}	
 			}
 		}
@@ -87,10 +87,10 @@ public class ShopDisplayPanel extends DisplayPanel
 			
 			if(checkbutton(buttonbbc, e.getX(), e.getY())) 
 			{
-				if(Main.player[0].money >= 20) 
+				if(player.money >= 20) 
 				{
-					Main.player[0].money = Main.player[0].money - 20;
-					Main.player[0].dick = new Dick("penis_bbc");
+					player.money -= 20;
+					player.dick = new Dick("penis_bbc");
 				}
 			}
 		}
@@ -98,20 +98,20 @@ public class ShopDisplayPanel extends DisplayPanel
 		{
 			System.out.println("Clicked Longschlong");
 			
-			if(Main.player[0].money >= 20) 
+			if(player.money >= 20) 
 			{
-				Main.player[0].money = Main.player[0].money - 20;
-				Main.player[0].dick = new Dick("penis_longschlong");
+				player.money -= 20;
+				player.dick = new Dick("penis_longschlong");
 			}
 		}
 		if(checkbutton(buttontriangle, e.getX(), e.getY())) 
 		{
 			System.out.println("Clicked triangledick");
 			
-			if(Main.player[0].money >= 20) 
+			if(player.money >= 20) 
 			{
-				Main.player[0].money = Main.player[0].money - 20;
-				Main.player[0].dick = new Dick("penis_triangle");
+				player.money -= 20;
+				player.dick = new Dick("penis_triangle");
 			}
 		}
 	}
@@ -122,7 +122,7 @@ public class ShopDisplayPanel extends DisplayPanel
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) 
 		{
 			System.out.println("Clicked ESCAPE");
-			Main.changeDisplay(new GameDisplayPanel());
+			KeksspielClient.changeDisplay(new GameDisplayPanel());
 		}
 	}
 }
