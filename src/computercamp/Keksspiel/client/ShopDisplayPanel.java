@@ -50,22 +50,8 @@ public class ShopDisplayPanel extends DisplayPanel
 	public void mouseClicked(MouseEvent e) 
 	{
 		if(checkbutton(buttonmorecum, e.getX(), e.getY())) KeksspielClient.networkThread.buyItem("more_cum");
-		if(checkbutton(buttonbiggerdick, e.getX(), e.getY())) 
-		{	
-			KeksspielClient.networkThread.buyItem("bigger_dick");
-		}
-		if(checkbutton(buttonfastercum, e.getX(), e.getY())) 
-		{
-			KeksspielClient.networkThread.buyItem("cum_faster");
-//			if(checkbutton(buttonfastercum, e.getX(), e.getY()))
-//			{
-//				if(player.money >= 50 && player.jerkDuration >= 7000)
-//				{
-//					player.money -= 50;	
-//					player.jerkDuration -= 1000;
-//				}	
-//			}
-		}
+		if(checkbutton(buttonbiggerdick, e.getX(), e.getY())) KeksspielClient.networkThread.buyItem("bigger_dick");
+		if(checkbutton(buttonfastercum, e.getX(), e.getY()))  KeksspielClient.networkThread.buyItem("cum_faster"); 
 		if(checkbutton(buttonbbc, e.getX(), e.getY())) KeksspielClient.networkThread.buyItem("penis_bbc");
 		if(checkbutton(buttonlongschlong, e.getX(), e.getY())) KeksspielClient.networkThread.buyItem("penis_longschlong");
 		if(checkbutton(buttontriangle, e.getX(), e.getY())) KeksspielClient.networkThread.buyItem("penis_triangle");
