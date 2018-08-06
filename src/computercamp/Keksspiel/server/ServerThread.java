@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import computercamp.Keksspiel.client.Dick;
+
 public class ServerThread extends Thread
 {
 	private Socket socket;
@@ -41,17 +43,7 @@ public class ServerThread extends Thread
 				String[] frag = inputLine.split(" ");
 				switch(arg(frag, 0))
 				{
-					case "add": 
-						if(player != null) out.println("duplicate");
-						if(KeksspielServer.gameStarted) out.println("no");
-						else if(Player.pcounter < 4) 
-						{
-							player = new Player(arg(frag, 1), KeksspielServer.game);
-							out.println("ok " + player.id);
-							println("Added player " + player.id + ": " + arg(frag, 1));
-						}
-						else out.println("full");
-						break;
+					case "add": add(arg(frag, 1)); break;
 					case "ready": 
 						if(player != null) 
 						{
@@ -64,39 +56,14 @@ public class ServerThread extends Thread
 					case "player":
 						int id;
 						try {id = Integer.parseInt(arg(frag, 1));} catch(Exception e) {id = -1;}
-						if(id < 0 || id >= 4) {out.println("null"); break;}
-						Player p = KeksspielServer.game.players[id];
-						out.println("id " + id);
-						if(p == null) {out.println("null"); break;}
-						out.println("name " + p.name);
-						out.println("money " + p.money);
-						out.println("cum_size " + p.cumSize);
-						out.println("jerk_duration " + p.jerkDuration);
-						out.println("jerk " + p.jerk);
-						out.println("came " + p.came);
-						if(p.cum != null) out.println("cum " + p.cum.px + " " + p.cum.py);
-						out.println("dick " + p.dick.name);
-						out.println("end");
+						player(id);
 						break;
-					case "jerk":
-						int v;
-						float mx, my;
-						if(player.came) break;
-						try
-						{
-							v = Integer.parseInt(arg(frag, 1));
-							mx = Float.parseFloat(arg(frag, 2));
-							my = Float.parseFloat(arg(frag, 3));
-							player.jerk += v;
-							out.println("ok");
-							if(player.jerk > player.jerkDuration) player.cum(mx, my);
-						} 
-						catch(Exception e) {v = (int)(mx = my = -1);}
-						break;
+					case "jerk": jerk(Integer.parseInt(arg(frag, 1)), Float.parseFloat(arg(frag, 2)), Float.parseFloat(arg(frag, 3))); break;
+					case "shop": shop(arg(frag, 1)); break;
 					default: 
-							out.println("unknown " + inputLine);
-							System.out.println("Unknown command: " + inputLine);
-							break;
+						out.println("unknown " + inputLine);
+						System.out.println("Unknown command: " + inputLine);
+						break;
 				}
 			}
 			println("Connection closed");
@@ -110,6 +77,108 @@ public class ServerThread extends Thread
 			println("Oh no, this thread crashed :(");
 			e.printStackTrace();
 		}
+	}
+	
+	private void shop(String item)
+	{
+		switch(item)
+		{
+			case "penis_bbc": if(player.money >= 20) 
+				{
+					player.money -= 20;
+					player.dick = new Dick("penis_bbc");
+					out.println("ok");
+				}
+				else out.println("no");
+			break;
+			case "penis_longschlong": if(player.money >= 20) 
+				{
+					player.money -= 20;
+					player.dick = new Dick("penis_longschlong");
+					out.println("ok");
+				}
+				else out.println("no");
+			break;
+			case "penis_triangle": if(player.money >= 20) 
+				{
+					player.money -= 20;
+					player.dick = new Dick("penis_triangle");
+					out.println("ok");
+				}
+				else out.println("no");
+			break;
+			case "more_cum": if(player.money >= 100)
+				{
+					player.money -= 100;
+					player.cumSize += 0.3;
+					out.println("ok");
+				}
+				else out.println("no");
+			break;
+			case "bigger_dick": if(player.money >= 250 && player.jerkDuration >= 7000) 
+				{
+					player.money -= 250;	
+					player.jerkDuration -= 800;
+					player.cumSize += 0.3;
+					out.println("ok");
+				}
+				else out.println("no");
+			break;
+			case "cum_faster": if(player.money >= 50 && player.jerkDuration >= 7000)
+				{
+					player.money -= 50;	
+					player.jerkDuration -= 1000;
+					out.println("ok");
+				}
+				else out.println("no");
+			break;
+			default: 
+				System.out.println("Unknown item: " + item);
+				out.println("unknown " + item);
+			break;
+		}
+	}
+	
+	private void player(int id)
+	{
+		if(id < 0 || id >= 4) {out.println("null"); return;}
+		Player p = KeksspielServer.game.players[id];
+		out.println("id " + id);
+		if(p == null) {out.println("null"); return;}
+		out.println("name " + p.name);
+		out.println("money " + p.money);
+		out.println("cum_size " + p.cumSize);
+		out.println("jerk_duration " + p.jerkDuration);
+		out.println("jerk " + p.jerk);
+		out.println("came " + p.came);
+		if(p.cum != null) out.println("cum " + p.cum.px + " " + p.cum.py);
+		out.println("dick " + p.dick.name);
+		out.println("end");
+	}
+	
+	private void add(String name)
+	{
+		if(player != null) out.println("duplicate");
+		if(KeksspielServer.gameStarted) out.println("no");
+		else if(Player.pcounter < 4) 
+		{
+			player = new Player(name, KeksspielServer.game);
+			out.println("ok " + player.id);
+			println("Added player " + player.id + ": " + name);
+		}
+		else out.println("full");
+	}
+	
+	private void jerk(int v, float mx, float my)
+	{
+		if(player.came) return;
+		try
+		{
+			player.jerk += v;
+			out.println("ok");
+			if(player.jerk > player.jerkDuration) player.cum(mx, my);
+		} 
+		catch(Exception e) {v = (int)(mx = my = -1);}
 	}
 	
 	private String arg(String[] fragments, int index)

@@ -26,3 +26,7 @@ S: id <player_ID>
 C: jerk <velocity> <mouseX> <mouseY>
 S: ok
 
+//Buy Item
+C: shop <item_name>
+S: ok / no
+

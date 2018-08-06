@@ -69,6 +69,11 @@ public class ClientThread extends Thread
 		}
 	}
 	
+	public synchronized void buyItem(String itemName)
+	{
+		out.println("shop " + itemName);
+	}
+	
 	public synchronized void reportJerk(int speed, float mouseX, float mouseY)
 	{
 		out.println("jerk " + speed + " " + mouseX + " " + mouseY);
