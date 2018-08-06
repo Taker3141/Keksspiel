@@ -23,9 +23,6 @@ public class WaitingDisplayPanel extends DisplayPanel
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		if(e.getKeyCode() == KeyEvent.VK_ENTER)
-		{
-			KeksspielClient.networkThread.reportReady();
-		}
+		if(e.getKeyCode() == KeyEvent.VK_ENTER) KeksspielClient.networkThread.reportReady();
 	}
 }

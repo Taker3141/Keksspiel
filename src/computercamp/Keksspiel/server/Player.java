@@ -9,7 +9,7 @@ public class Player
 {
 	public Dick dick = new Dick("penis_basic");
 	public String name;
-	public int money = 1000;
+	public int money = 0;
 	public float cumSize = 1f/20f;
 	public final int id;
 	public float distanceFromCookie = -1;

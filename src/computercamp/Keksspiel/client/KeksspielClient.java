@@ -1,9 +1,5 @@
 package computercamp.Keksspiel.client;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.Socket;
-
 import javax.swing.JFrame;
 
 public class KeksspielClient
@@ -41,6 +37,7 @@ public class KeksspielClient
 		display = newDisplay;
 		frame.add(display);
 		frame.addKeyListener(display);
+		frame.requestFocus();
 		frame.repaint();
 		frame.setSize(frame.getWidth() + 1, frame.getHeight());
 		frame.setSize(frame.getWidth() - 1, frame.getHeight());

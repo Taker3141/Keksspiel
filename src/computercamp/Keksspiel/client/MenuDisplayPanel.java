@@ -8,9 +8,11 @@ import java.net.SocketException;
 
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class MenuDisplayPanel extends DisplayPanel
 {
-	public JTextField ip;
+	public JTextField ip, name;
+	public Button help = new Button(1f/1.38f, 1f/1.4f, 2f/6f, 2f/5f);
 	
 	public MenuDisplayPanel() 
 	{
@@ -19,9 +21,8 @@ public class MenuDisplayPanel extends DisplayPanel
 		KeksspielClient.frame.addKeyListener(this);
 		
 		ip = new JTextField();
-		ip.setSize(300,32);
+		ip.setSize(300, 32);
 		ip.setLocation(340, 250);
-		ip.setVisible(false);
 		ip.addActionListener((ActionEvent e) ->
 				{
 					try
@@ -34,7 +35,7 @@ public class MenuDisplayPanel extends DisplayPanel
 						}
 						byte[] bytes = new byte[4];
 						for(int i = 0; i < 4; i++) bytes[i] = (byte)Integer.parseInt(numbers[i]);
-						KeksspielClient.networkThread = new ClientThread(InetAddress.getByAddress(bytes));
+						KeksspielClient.networkThread = new ClientThread(InetAddress.getByAddress(bytes), name.getText());
 						KeksspielClient.networkThread.start();
 						KeksspielClient.changeDisplay(new WaitingDisplayPanel());
 					}
@@ -51,51 +52,24 @@ public class MenuDisplayPanel extends DisplayPanel
 				});
 		
 		add(ip);
+		
+		name = new JTextField();
+		name.setSize(300, 32);
+		name.setLocation(340, 350);
+		add(name);
 	}
-	
-	public Button start = new Button(1f/19.8f, 1f/1.4f, 1f/6f, 1f/5f);
-	public Button multiplayer = new Button(1f/2.5f, 1f/1.4f, 1f/6f, 1f/5f);
-	public Button hilfe = new Button(1f/1.38f, 1f/1.4f, 2f/6f, 2f/5f);
 	
 	public void paint(Graphics g)
 	{
 		super.paint(g);
-		g.drawImage(Ressource.get("Menü"),  0, 0, size.width, size.height, null);
-		if(ip.isVisible())
-		{
-			g.setFont(new Font("Arial",0,18));
-			g.drawString("Bitte gib die IP-Adresse ein: ", 340, 240);
-		}
-	}
-	
-    @Override
-	public void keyPressed(KeyEvent e)
-	{
-    	System.out.println("key pressed");
-		if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
-		{
-			KeksspielClient.changeDisplay(KeksspielClient.menu);
-		}		
-    	
+		g.drawImage(Ressource.get("Menu"),  0, 0, size.width, size.height, null); 
+		g.setFont(new Font("Arial",0,18));
+		g.drawString("Server-IP-Adresse: ", 340, 240);
+		g.drawString("Name: ", 340, 340);
 	}
 
 	public void mouseClicked(MouseEvent e) 
 	{
-		if(checkbutton(start, e.getX(), e.getY())) 
-		{
-			System.out.println("Clicked Start");
-			KeksspielClient.changeDisplay(new GameDisplayPanel());
-	    }
-		if(checkbutton(multiplayer, e.getX(), e.getY())) 
-		{
-			System.out.println("Clicked Multiplayer");
-			ip.setVisible(true);
-			repaint();
-		}
-		if(checkbutton(hilfe, e.getX(), e.getY())) 
-		{
-			System.out.println("Clicked Help");
-			KeksspielClient.changeDisplay(new HelpDisplayPanel());
-		}
+		if(checkbutton(help, e.getX(), e.getY())) KeksspielClient.changeDisplay(new HelpDisplayPanel());
 	}
 }

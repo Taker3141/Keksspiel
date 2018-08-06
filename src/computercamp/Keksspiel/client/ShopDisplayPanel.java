@@ -63,7 +63,7 @@ public class ShopDisplayPanel extends DisplayPanel
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) 
 		{
 			System.out.println("Clicked ESCAPE");
-			KeksspielClient.changeDisplay(new GameDisplayPanel());
+			KeksspielClient.changeDisplay(KeksspielClient.gameDisplay);
 		}
 	}
 }

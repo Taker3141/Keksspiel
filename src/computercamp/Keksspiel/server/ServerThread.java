@@ -158,6 +158,7 @@ public class ServerThread extends Thread
 	
 	private void add(String name)
 	{
+		name = name.replace("_", " ");
 		if(player != null) out.println("duplicate");
 		if(KeksspielServer.gameStarted) out.println("no");
 		else if(Player.pcounter < 4) 

@@ -4,11 +4,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JTextField;
-
-public class HelpDisplayPanel extends DisplayPanel{
-	
-	
+@SuppressWarnings("serial")
+public class HelpDisplayPanel extends DisplayPanel
+{
 	public HelpDisplayPanel() 
 	{
 		KeksspielClient.frame.addKeyListener(this);
@@ -26,5 +24,9 @@ public class HelpDisplayPanel extends DisplayPanel{
 		g.drawString("Press 'r' to restart the game (your money wont reset)", (int) (1f/3.1f * size.width), (int) (1f/1.7f * size.height));
 	}
 	
-	 
+	@Override
+	public void keyPressed(KeyEvent e)
+	{
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) KeksspielClient.changeDisplay(KeksspielClient.menu);
+	}
 }

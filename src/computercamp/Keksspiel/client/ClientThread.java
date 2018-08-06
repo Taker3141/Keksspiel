@@ -14,10 +14,12 @@ public class ClientThread extends Thread
 	private PrintWriter out;
 	private BufferedReader in;
 	private boolean finished = false;
+	private final String name;
 	
-	public ClientThread(InetAddress serverAddress) throws SocketException
+	public ClientThread(InetAddress serverAddress, String playerName) throws SocketException
 	{
 		Socket serverSocket = null;
+		name = playerName;
 		try
 		{
 			serverSocket = new Socket(serverAddress, 10000);
@@ -57,7 +59,7 @@ public class ClientThread extends Thread
 	
 	public synchronized void registerPlayer()
 	{
-		out.println("add Marcell_D'avis");
+		out.println("add " + name.replace(" ", "_"));
 		try
 		{
 			String inputLine = in.readLine();
