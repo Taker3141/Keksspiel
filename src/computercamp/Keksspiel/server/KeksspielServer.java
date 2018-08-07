@@ -64,4 +64,13 @@ public class KeksspielServer
 		gameStarted = false;
 		System.out.println("Round finished!");
 	}
+
+	public static void checkEmpty()
+	{
+		boolean empty = true;
+		for(Player p : game.players) empty &= p == null;
+		if(!empty) return;
+		System.out.println("Everyone disconnected, shutting down");
+		System.exit(0);
+	}
 }

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
 
 import computercamp.Keksspiel.client.Dick;
 
@@ -73,8 +74,15 @@ public class ServerThread extends Thread
 			socket.close();
 			in.close();
 			out.close();
-		} 
-		catch (Exception e)
+		}
+		catch(SocketException e)
+		{
+			println(player.name + " disconnected");
+			KeksspielServer.game.players[player.id] = null;
+			player = null;
+			KeksspielServer.checkEmpty();
+		}
+		catch(Exception e)
 		{
 			println("Oh no, this thread crashed :(");
 			e.printStackTrace();
