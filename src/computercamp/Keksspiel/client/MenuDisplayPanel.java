@@ -20,42 +20,44 @@ public class MenuDisplayPanel extends DisplayPanel
 		this.setLayout(null);
 		KeksspielClient.frame.addKeyListener(this);
 		
+		ActionListener listener = (ActionEvent e) ->
+		{
+			try
+			{
+				String[] numbers = ip.getText().split("\\.");
+				if(numbers.length != 4)
+				{
+					ip.setText("Ungültiges Format");
+					return;
+				}
+				byte[] bytes = new byte[4];
+				for(int i = 0; i < 4; i++) bytes[i] = (byte)Integer.parseInt(numbers[i]);
+				KeksspielClient.networkThread = new ClientThread(InetAddress.getByAddress(bytes), name.getText());
+				KeksspielClient.networkThread.start();
+				KeksspielClient.changeDisplay(new WaitingDisplayPanel());
+			}
+			catch(SocketException ex1)
+			{
+				ip.setText("Kein Server unter dieser Addresse gefunden!");
+				ex1.printStackTrace();
+			}
+			catch(Exception ex) 
+			{
+				ip.setText("Ungültiges Format");
+				ex.printStackTrace();
+			}
+		};
+				
 		ip = new JTextField();
 		ip.setSize(300, 32);
 		ip.setLocation(340, 250);
-		ip.addActionListener((ActionEvent e) ->
-				{
-					try
-					{
-						String[] numbers = ip.getText().split("\\.");
-						if(numbers.length != 4)
-						{
-							ip.setText("Ungültiges Format");
-							return;
-						}
-						byte[] bytes = new byte[4];
-						for(int i = 0; i < 4; i++) bytes[i] = (byte)Integer.parseInt(numbers[i]);
-						KeksspielClient.networkThread = new ClientThread(InetAddress.getByAddress(bytes), name.getText());
-						KeksspielClient.networkThread.start();
-						KeksspielClient.changeDisplay(new WaitingDisplayPanel());
-					}
-					catch(SocketException ex1)
-					{
-						ip.setText("Kein Server unter dieser Addresse gefunden!");
-						ex1.printStackTrace();
-					}
-					catch(Exception ex) 
-					{
-						ip.setText("Ungültiges Format");
-						ex.printStackTrace();
-					}
-				});
-		
+		ip.addActionListener(listener);
 		add(ip);
 		
 		name = new JTextField();
 		name.setSize(300, 32);
 		name.setLocation(340, 350);
+		name.addActionListener(listener);
 		add(name);
 	}
 	

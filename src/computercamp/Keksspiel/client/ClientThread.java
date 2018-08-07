@@ -13,8 +13,8 @@ public class ClientThread extends Thread
 	private Socket socket;
 	private PrintWriter out;
 	private BufferedReader in;
-	private boolean finished = false;
 	private final String name;
+	private int failCounter = 0;
 	
 	public ClientThread(InetAddress serverAddress, String playerName) throws SocketException
 	{
@@ -46,12 +46,23 @@ public class ClientThread extends Thread
 		registerPlayer();
 		try
 		{
-			while(!in.readLine().equals("start"));
-			KeksspielClient.changeDisplay(KeksspielClient.gameDisplay);
-			while(!finished)
+			while(true)
 			{
-				syncPlayers();
-				sleep(500);
+				while(!in.readLine().equals("start"));
+				KeksspielClient.changeDisplay(new GameDisplayPanel());
+				while(true)
+				{
+					syncPlayers();
+					boolean allCame = true;
+					for(ClientPlayer p : KeksspielClient.player) if(p != null) 
+						allCame &= p.came;
+					if(allCame) 
+					{
+
+						break;
+					}
+					sleep(50);
+				} 
 			}
 		}
 		catch(Exception e) {}
@@ -63,7 +74,7 @@ public class ClientThread extends Thread
 		try
 		{
 			String inputLine = in.readLine();
-			KeksspielClient.gameDisplay.player = KeksspielClient.player[Integer.parseInt(inputLine.split(" ")[1])];
+			KeksspielClient.playerIndex = Integer.parseInt(inputLine.split(" ")[1]);
 		} 
 		catch (IOException e)
 		{
@@ -108,8 +119,16 @@ public class ClientThread extends Thread
 						case "jerk": KeksspielClient.player[i].jerk = Integer.parseInt(frag[1]); break;
 						case "came": KeksspielClient.player[i].came = Boolean.parseBoolean(frag[1]); break;
 						case "cum" : 
-							KeksspielClient.player[i].cumX = Float.parseFloat(frag[1]);
-							KeksspielClient.player[i].cumY = Float.parseFloat(frag[2]);
+							if(!frag[1].equals("null"))
+							{
+								KeksspielClient.player[i].cumX = Float.parseFloat(frag[1]);
+								KeksspielClient.player[i].cumY = Float.parseFloat(frag[2]);
+							}
+							else
+							{
+								KeksspielClient.player[i].cumX = -1;
+								KeksspielClient.player[i].cumY = -1;
+							}
 							break;
 						case "dick": KeksspielClient.player[i].dick = new Dick(frag[1]); break;
 						case "end": end = true; break;
@@ -117,12 +136,17 @@ public class ClientThread extends Thread
 					}
 				}
 			}
+			failCounter = 0;
 			KeksspielClient.frame.repaint();
 		}
 		catch(Exception e)
 		{
 			System.out.println("Player sync failed");
-			e.printStackTrace();
+			if(failCounter++ > 50) 
+			{
+				System.out.println("Disconnected from Server");
+				System.exit(-1);
+			}
 		}
 	}
 }

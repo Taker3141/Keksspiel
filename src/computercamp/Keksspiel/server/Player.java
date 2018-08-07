@@ -42,6 +42,7 @@ public class Player
 		if(distanceFromCookie < 0.05) money += 35;
 		else if(distanceFromCookie < 0.07) money += 20;
 		else if(distanceFromCookie < 0.08) money += 10;
+		KeksspielServer.checkFinished();
 		System.out.println(name + " came!");
 	}
 	
@@ -58,5 +59,12 @@ public class Player
 		list[3] = (float)Math.sqrt(dx * dx + dy * dy);
 		Arrays.sort(list);
 		return list[3];
+	}
+
+	public void reset()
+	{
+		distanceFromCookie = -1;
+		jerk = 0;
+		ready = false;
 	}
 }

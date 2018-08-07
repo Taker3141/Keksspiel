@@ -48,6 +48,8 @@ public class ServerThread extends Thread
 						if(player != null) 
 						{
 							player.ready = true;
+							player.came = false;
+							player.cum = null;
 							out.println("ok");
 							println(player.name + " is ready");
 							KeksspielServer.checkReady();
@@ -110,7 +112,7 @@ public class ServerThread extends Thread
 			case "more_cum": if(player.money >= 100)
 				{
 					player.money -= 100;
-					player.cumSize += 0.3;
+					player.cumSize += 0.8f;
 					out.println("ok");
 				}
 				else out.println("no");
@@ -151,7 +153,7 @@ public class ServerThread extends Thread
 		out.println("jerk_duration " + p.jerkDuration);
 		out.println("jerk " + p.jerk);
 		out.println("came " + p.came);
-		if(p.cum != null) out.println("cum " + p.cum.px + " " + p.cum.py);
+		if(p.cum != null) out.println("cum " + p.cum.px + " " + p.cum.py); else out.println("cum null");
 		out.println("dick " + p.dick.name);
 		out.println("end");
 	}

@@ -9,6 +9,7 @@ public class KeksspielClient
 	public static MenuDisplayPanel menu;
 	public static GameDisplayPanel gameDisplay;
 	public static ClientPlayer[] player = new ClientPlayer[4];
+	public static int playerIndex;
 	public static ClientThread networkThread;
 	
 	public static void main(String[] args)
@@ -16,7 +17,6 @@ public class KeksspielClient
 		frame = new JFrame("Keksspiel");
 		frame.setSize(1024, 512);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gameDisplay = new GameDisplayPanel();
 		menu = new MenuDisplayPanel();
 		display = menu;
 		frame.add(display);

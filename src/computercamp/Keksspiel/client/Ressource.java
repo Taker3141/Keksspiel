@@ -18,7 +18,7 @@ public class Ressource
 		File[] resFiles = new File("res/texture").listFiles();
 		for(File f : resFiles)
 		{
-			map.put(f.getName().split("\\.")[0], loadImage(f));
+			map.put(f.getName().split("\\.")[0].toLowerCase(), loadImage(f));
 			if(f.getName().equals("Figur1.png"))
 			{
 				try
@@ -50,7 +50,7 @@ public class Ressource
 	
 	public static Image get(String key)
 	{
-		return map.get(key);
+		return map.get(key.toLowerCase());
 	}
 	
 	private static Image loadImage(File file)

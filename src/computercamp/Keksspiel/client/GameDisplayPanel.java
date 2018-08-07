@@ -10,7 +10,9 @@ public class GameDisplayPanel extends DisplayPanel
 	private int lastmousex, lastmousey;
 	private int speed;
 	private Button shopbutton = new Button(15f/17f, 1f/9f, 1f/9f, 1f/9f);
-	public ClientPlayer player = new ClientPlayer(0, KeksspielClient.gameDisplay);
+	private Button buttonReady = new Button(15f/17f, 4f/9f, 1f/9f, 1f/9f);
+	public ClientPlayer player = KeksspielClient.player[KeksspielClient.playerIndex];
+	private boolean ready = false;
 	
 	public GameDisplayPanel()
 	{
@@ -39,7 +41,11 @@ public class GameDisplayPanel extends DisplayPanel
 			g.drawImage(Ressource.get("jerk_bar_tip"), (int) (player.jerk * (1 / (float)player.jerkDuration) * size.width) - 60, 10, 60, 60, null);
 		}
 		
-		if(player.came) g.drawImage(Ressource.get("Shopbutton"),(int)(shopbutton.bx * size.width), (int)(shopbutton.by * size.height), (int)(shopbutton.bl * size.width), (int)(shopbutton.bh * size.height), null);
+		if(player.came) 
+		{
+			g.drawImage(Ressource.get("button_shop"),(int)(shopbutton.bx * size.width), (int)(shopbutton.by * size.height), (int)(shopbutton.bl * size.width), (int)(shopbutton.bh * size.height), null);
+			if(!ready) g.drawImage(Ressource.get("button_ready"),(int)(buttonReady.bx * size.width), (int)(buttonReady.by * size.height), (int)(buttonReady.bl * size.width), (int)(buttonReady.bh * size.height), null);
+		}
 		g.setFont(new Font("Arial",0,14));
 		
 		
@@ -52,19 +58,17 @@ public class GameDisplayPanel extends DisplayPanel
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		if(e.getKeyCode() == KeyEvent.VK_R)
-		{
-			KeksspielClient.changeDisplay(new GameDisplayPanel());
-		}
+		
 	}
 	
 	@Override 
 	public void mousePressed(MouseEvent e)
 	{
-		if(checkbutton(shopbutton, e.getX(), e.getY()) && player.came) 
+		if(checkbutton(shopbutton, e.getX(), e.getY()) && player.came) KeksspielClient.changeDisplay(new ShopDisplayPanel(player));
+		if(checkbutton(buttonReady, e.getX(), e.getY()) && player.came && !ready) 
 		{
-			System.out.println("Clicked Shop");
-			KeksspielClient.changeDisplay(new ShopDisplayPanel(player));
+			KeksspielClient.networkThread.reportReady();
+			ready = true;
 		}
 	}
 

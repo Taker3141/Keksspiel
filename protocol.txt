@@ -9,6 +9,9 @@ S: ok <player_ID>
 //Game ready
 S: start
 
+//Game done
+S: finished
+
 //Get Player Info
 C: player <player_ID>
 S: id <player_ID>

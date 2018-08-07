@@ -51,6 +51,17 @@ public class KeksspielServer
 		if(ready) for(ServerThread thread : threadList) thread.sendStart();
 		else return;
 		gameStarted = true;
+		for(Player p : game.players) if(p != null) p.ready = false;
 		System.out.println("Started Game!");
+	}
+	
+	public static void checkFinished()
+	{
+		boolean finished = true;
+		for(Player p : game.players) if(p != null) finished &= p.came;
+		if(finished) for(Player p : game.players) if(p != null) {p.reset();}
+		else return;
+		gameStarted = false;
+		System.out.println("Round finished!");
 	}
 }
