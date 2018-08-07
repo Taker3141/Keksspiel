@@ -48,19 +48,19 @@ public class ClientThread extends Thread
 		{
 			while(true)
 			{
-				while(!in.readLine().equals("start"));
-				KeksspielClient.changeDisplay(new GameDisplayPanel());
+				while(true)
+				{
+					out.println("status");
+					if(in.readLine().equals("start")) break; 
+					sleep(50);
+				}
+				KeksspielClient.changeDisplay(KeksspielClient.gameDisplay);
 				while(true)
 				{
 					syncPlayers();
 					boolean allCame = true;
-					for(ClientPlayer p : KeksspielClient.player) if(p != null) 
-						allCame &= p.came;
-					if(allCame) 
-					{
-
-						break;
-					}
+					for(ClientPlayer p : KeksspielClient.player) if(p != null) allCame &= p.came;
+					if(allCame) break;
 					sleep(50);
 				} 
 			}
@@ -75,6 +75,7 @@ public class ClientThread extends Thread
 		{
 			String inputLine = in.readLine();
 			KeksspielClient.playerIndex = Integer.parseInt(inputLine.split(" ")[1]);
+			KeksspielClient.gameDisplay.player = KeksspielClient.player[KeksspielClient.playerIndex];
 		} 
 		catch (IOException e)
 		{
@@ -117,7 +118,7 @@ public class ClientThread extends Thread
 						case "cum_size": KeksspielClient.player[i].cumSize = Float.parseFloat(frag[1]); break;
 						case "jerk_duration": KeksspielClient.player[i].jerkDuration = Integer.parseInt(frag[1]); break;
 						case "jerk": KeksspielClient.player[i].jerk = Integer.parseInt(frag[1]); break;
-						case "came": KeksspielClient.player[i].came = Boolean.parseBoolean(frag[1]); break;
+						case "came": KeksspielClient.player[i].came = Boolean.parseBoolean(frag[1]); KeksspielClient.player[i].cameLast = Boolean.parseBoolean(frag[2]); break;
 						case "cum" : 
 							if(!frag[1].equals("null"))
 							{

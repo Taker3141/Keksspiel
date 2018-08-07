@@ -55,6 +55,7 @@ public class ShopDisplayPanel extends DisplayPanel
 		if(checkbutton(buttonbbc, e.getX(), e.getY())) KeksspielClient.networkThread.buyItem("penis_bbc");
 		if(checkbutton(buttonlongschlong, e.getX(), e.getY())) KeksspielClient.networkThread.buyItem("penis_longschlong");
 		if(checkbutton(buttontriangle, e.getX(), e.getY())) KeksspielClient.networkThread.buyItem("penis_triangle");
+		KeksspielClient.networkThread.syncPlayers();
 	}
 
 	@Override

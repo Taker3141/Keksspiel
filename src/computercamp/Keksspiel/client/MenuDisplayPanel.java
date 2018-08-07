@@ -36,10 +36,10 @@ public class MenuDisplayPanel extends DisplayPanel
 				KeksspielClient.networkThread.start();
 				KeksspielClient.changeDisplay(new WaitingDisplayPanel());
 			}
-			catch(SocketException ex1)
+			catch(SocketException ex)
 			{
 				ip.setText("Kein Server unter dieser Addresse gefunden!");
-				ex1.printStackTrace();
+				ex.printStackTrace();
 			}
 			catch(Exception ex) 
 			{
@@ -52,6 +52,7 @@ public class MenuDisplayPanel extends DisplayPanel
 		ip.setSize(300, 32);
 		ip.setLocation(340, 250);
 		ip.addActionListener(listener);
+		ip.setText("127.0.0.1");
 		add(ip);
 		
 		name = new JTextField();

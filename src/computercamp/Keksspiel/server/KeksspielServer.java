@@ -48,8 +48,7 @@ public class KeksspielServer
 	{
 		boolean ready = true;
 		for(Player p : game.players) if(p != null) ready &= p.ready;
-		if(ready) for(ServerThread thread : threadList) thread.sendStart();
-		else return;
+		if(!ready) return;
 		gameStarted = true;
 		for(Player p : game.players) if(p != null) p.ready = false;
 		System.out.println("Started Game!");
@@ -59,10 +58,12 @@ public class KeksspielServer
 	{
 		boolean finished = true;
 		for(Player p : game.players) if(p != null) finished &= p.came;
-		if(finished) for(Player p : game.players) if(p != null) {p.reset();}
-		else return;
-		gameStarted = false;
-		System.out.println("Round finished!");
+		if(finished) 
+		{
+			for(Player p : game.players) if(p != null) p.reset();
+			gameStarted = false;
+			System.out.println("Round finished!");
+		}
 	}
 
 	public static void checkEmpty()

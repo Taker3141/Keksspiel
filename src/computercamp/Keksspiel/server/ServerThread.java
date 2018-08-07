@@ -50,6 +50,7 @@ public class ServerThread extends Thread
 						{
 							player.ready = true;
 							player.came = false;
+							player.cameLast = false;
 							player.cum = null;
 							out.println("ok");
 							println(player.name + " is ready");
@@ -63,6 +64,7 @@ public class ServerThread extends Thread
 						break;
 					case "jerk": jerk(Integer.parseInt(arg(frag, 1)), Float.parseFloat(arg(frag, 2)), Float.parseFloat(arg(frag, 3))); break;
 					case "shop": shop(arg(frag, 1)); break;
+					case "status": if(KeksspielServer.gameStarted) out.println("start"); else out.println("waiting"); break;
 					default: 
 						out.println("unknown " + inputLine);
 						System.out.println("Unknown command: " + inputLine);
@@ -120,7 +122,7 @@ public class ServerThread extends Thread
 			case "more_cum": if(player.money >= 100)
 				{
 					player.money -= 100;
-					player.cumSize += 0.8f;
+					player.cumSize += 0.05f;
 					out.println("ok");
 				}
 				else out.println("no");
@@ -160,7 +162,7 @@ public class ServerThread extends Thread
 		out.println("cum_size " + p.cumSize);
 		out.println("jerk_duration " + p.jerkDuration);
 		out.println("jerk " + p.jerk);
-		out.println("came " + p.came);
+		out.println("came " + p.came + " " + p.cameLast);
 		if(p.cum != null) out.println("cum " + p.cum.px + " " + p.cum.py); else out.println("cum null");
 		out.println("dick " + p.dick.name);
 		out.println("end");
@@ -189,7 +191,7 @@ public class ServerThread extends Thread
 			out.println("ok");
 			if(player.jerk > player.jerkDuration) player.cum(mx, my);
 		} 
-		catch(Exception e) {v = (int)(mx = my = -1);}
+		catch(Exception e) {v = (int)(mx = my = -1); e.printStackTrace();}
 	}
 	
 	private String arg(String[] fragments, int index)
@@ -201,10 +203,5 @@ public class ServerThread extends Thread
 	private void println(String message)
 	{
 		System.out.println("Thread " + threadNumber + ": " + message);
-	}
-
-	public void sendStart()
-	{
-		out.println("start");
 	}
 }

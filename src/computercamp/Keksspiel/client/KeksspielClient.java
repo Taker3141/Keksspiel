@@ -23,6 +23,8 @@ public class KeksspielClient
 		frame.setVisible(true);
 		
 		for(int i = 0; i < 4; i++) player[i] = new ClientPlayer(i, gameDisplay);
+
+		gameDisplay = new GameDisplayPanel();
 	}
 	
 	public static void connetToServer()

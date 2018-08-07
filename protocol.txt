@@ -7,7 +7,8 @@ C: ready
 S: ok <player_ID>
 
 //Game ready
-S: start
+C: status
+S: start / waiting
 
 //Game done
 S: finished

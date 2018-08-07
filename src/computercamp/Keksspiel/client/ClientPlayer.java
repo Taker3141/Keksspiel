@@ -14,13 +14,12 @@ public class ClientPlayer
 	public float px, py, pw, ph;
 	public final int id;
 	public float distanceFromCookie = -1;
-	public boolean came = false;
+	public boolean came = false, cameLast = false;
 	public int jerkDuration = 10000;
 	public int jerk = 0;
 	public GameDisplayPanel display;
 	public boolean ready = false;
 	
-	public static int pcounter = 0;
 	public static final float[] X_POSITION = {1f/10f, 2f/10f, 6f/10f, 7f/10f};
 
 	public ClientPlayer(int id, GameDisplayPanel display)
@@ -31,11 +30,6 @@ public class ClientPlayer
 		this.pw = 1f/4f;
 		this.ph = 1f/2f;
 		this.display = display;
-	}
-	
-	public void cum(float cumX, float cumY)
-	{
-		
 	}
 	
 	public Image getTexture()
