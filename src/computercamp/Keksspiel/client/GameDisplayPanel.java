@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.*;
 
+import computercamp.Keksspiel.server.Cum;
+
 @SuppressWarnings("serial")
 public class GameDisplayPanel extends DisplayPanel
 {
@@ -18,7 +20,6 @@ public class GameDisplayPanel extends DisplayPanel
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		KeksspielClient.frame.addKeyListener(this);
-		System.out.println(player.id);
 	}
 	
 	public void paint(Graphics g)
@@ -58,7 +59,11 @@ public class GameDisplayPanel extends DisplayPanel
 		{
 			ClientPlayer p = KeksspielClient.player[i];
 			g.drawString(p.name + " : " + p.money + "$" + (p.came ? ", ist " + (p.cameLast ? "als letzter" : "") + " gekommen" : ""), (int) (1f/50f * size.width), (int) (0.2f/2f * size.height * i + 100));
-			g.drawImage(Ressource.get("cum"), (int)(p.cumX * size.width - (size.width * p.cumSize / 2)), (int)(p.cumY * size.height - (size.height * p.cumSize)), (int)(size.width * p.cumSize), (int)(size.height * p.cumSize * 2), null);
+			for(int j = 0; j < p.cum.length; j++) if(p.cum[j] != null)
+			{
+				Cum c = p.cum[j];
+				g.drawImage(Ressource.get("cum"), (int)(c.px * size.width - (size.width * p.cumSize / 2)), (int)(c.py * size.height - (size.height * p.cumSize)), (int)(size.width * p.cumSize), (int)(size.height * p.cumSize * 2), null);
+			}
 		}
 	}
 	@Override

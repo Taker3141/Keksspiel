@@ -7,9 +7,10 @@ import java.util.*;
 
 public class KeksspielServer
 {
-	public static Game game = new Game();
 	public static List<ServerThread> threadList;
 	public static boolean gameStarted = false;
+	public static int round = 0;
+	public static Player[] players = new Player[4];
 	
 	public static void main(String[] args)
 	{
@@ -47,20 +48,21 @@ public class KeksspielServer
 	public static void checkReady()
 	{
 		boolean ready = true;
-		for(Player p : game.players) if(p != null) ready &= p.ready;
+		for(Player p : players) if(p != null) ready &= p.ready;
 		if(!ready) return;
 		gameStarted = true;
-		for(Player p : game.players) if(p != null) p.ready = false;
-		System.out.println("Started Game!");
+		for(Player p : players) if(p != null) p.ready = false;
+		round++;
+		System.out.println("Starting Round " + round + "!");
 	}
 	
 	public static void checkFinished()
 	{
 		boolean finished = true;
-		for(Player p : game.players) if(p != null) finished &= p.came;
+		for(Player p : players) if(p != null) finished &= p.came;
 		if(finished) 
 		{
-			for(Player p : game.players) if(p != null) p.reset();
+			for(Player p : players) if(p != null) p.reset();
 			gameStarted = false;
 			System.out.println("Round finished!");
 		}
@@ -69,7 +71,7 @@ public class KeksspielServer
 	public static void checkEmpty()
 	{
 		boolean empty = true;
-		for(Player p : game.players) empty &= p == null;
+		for(Player p : players) empty &= p == null;
 		if(!empty) return;
 		System.out.println("Everyone disconnected, shutting down");
 		System.exit(0);

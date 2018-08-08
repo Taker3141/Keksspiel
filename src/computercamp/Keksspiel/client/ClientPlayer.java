@@ -3,14 +3,15 @@ package computercamp.Keksspiel.client;
 import java.awt.Image;
 import computercamp.Keksspiel.client.Dick;
 import computercamp.Keksspiel.client.Ressource;
+import computercamp.Keksspiel.server.Cum;
 
 public class ClientPlayer
 {
-	public Dick dick = new Dick("penis_basic");
+	public Dick dick = new Dick(Dick.DickType.BASIC);
 	public String name;
 	public int money = 0;
+	public Cum[] cum = new Cum[3];
 	public float cumSize = 1f/20f;
-	public float cumX = -1, cumY = -1;
 	public float px, py, pw, ph;
 	public final int id;
 	public float distanceFromCookie = -1;

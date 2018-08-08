@@ -51,7 +51,7 @@ public class ServerThread extends Thread
 							player.ready = true;
 							player.came = false;
 							player.cameLast = false;
-							player.cum = null;
+							player.cum = new Cum[3];
 							out.println("ok");
 							println(player.name + " is ready");
 							KeksspielServer.checkReady();
@@ -80,7 +80,7 @@ public class ServerThread extends Thread
 		catch(SocketException e)
 		{
 			println(player.name + " disconnected");
-			KeksspielServer.game.players[player.id] = null;
+			KeksspielServer.players[player.id] = null;
 			player = null;
 			KeksspielServer.checkEmpty();
 		}
@@ -95,26 +95,27 @@ public class ServerThread extends Thread
 	{
 		switch(item)
 		{
-			case "penis_bbc": if(player.money >= 20) 
+			case "penis_bbc": if(player.money >= 20 && player.dick.type != Dick.DickType.BBC) 
 				{
 					player.money -= 20;
-					player.dick = new Dick("penis_bbc");
+					player.dick.type = Dick.DickType.BBC;
 					out.println("ok");
 				}
 				else out.println("no");
 			break;
-			case "penis_longschlong": if(player.money >= 20) 
+			case "penis_longschlong": if(player.money >= 20 && player.dick.type != Dick.DickType.LONGSCHLONG) 
 				{
 					player.money -= 20;
-					player.dick = new Dick("penis_longschlong");
+					player.dick.type = Dick.DickType.LONGSCHLONG;
 					out.println("ok");
 				}
 				else out.println("no");
 			break;
-			case "penis_triangle": if(player.money >= 20) 
+			case "penis_triangle": if(player.money >= 200 && player.dick.type != Dick.DickType.TRIANGLE) 
 				{
-					player.money -= 20;
-					player.dick = new Dick("penis_triangle");
+					player.money -= 200;
+					player.dick.type = Dick.DickType.TRIANGLE;
+					player.cumSize *= 0.7f;
 					out.println("ok");
 				}
 				else out.println("no");
@@ -127,11 +128,12 @@ public class ServerThread extends Thread
 				}
 				else out.println("no");
 			break;
-			case "bigger_dick": if(player.money >= 250 && player.jerkDuration >= 7000) 
+			case "bigger_dick": if(player.money >= 100) 
 				{
-					player.money -= 250;	
-					player.jerkDuration -= 800;
-					player.cumSize += 0.3;
+					player.money -= 100;
+					player.dick.dw += 0.01;
+					player.dick.dh += 0.02;
+					player.cumSize += 0.02f;
 					out.println("ok");
 				}
 				else out.println("no");
@@ -139,7 +141,7 @@ public class ServerThread extends Thread
 			case "cum_faster": if(player.money >= 50 && player.jerkDuration >= 7000)
 				{
 					player.money -= 50;	
-					player.jerkDuration -= 1000;
+					player.jerkDuration -= 2000;
 					out.println("ok");
 				}
 				else out.println("no");
@@ -154,7 +156,7 @@ public class ServerThread extends Thread
 	private void player(int id)
 	{
 		if(id < 0 || id >= 4) {out.println("null"); return;}
-		Player p = KeksspielServer.game.players[id];
+		Player p = KeksspielServer.players[id];
 		out.println("id " + id);
 		if(p == null) {out.println("null"); return;}
 		out.println("name " + p.name);
@@ -163,8 +165,8 @@ public class ServerThread extends Thread
 		out.println("jerk_duration " + p.jerkDuration);
 		out.println("jerk " + p.jerk);
 		out.println("came " + p.came + " " + p.cameLast);
-		if(p.cum != null) out.println("cum " + p.cum.px + " " + p.cum.py); else out.println("cum null");
-		out.println("dick " + p.dick.name);
+		for(int i = 0; i < 3; i++) if(p.cum[i] != null) out.println("cum " + i + " " + p.cum[i].px + " " + p.cum[i].py + " " + p.cum[i].px); else out.println("cum " + i + " null");
+		out.println("dick " + p.dick.type.toString() + " " + p.dick.dw + " " + p.dick.dh);
 		out.println("end");
 	}
 	
@@ -175,7 +177,7 @@ public class ServerThread extends Thread
 		if(KeksspielServer.gameStarted) out.println("no");
 		else if(Player.pcounter < 4) 
 		{
-			player = new Player(name, KeksspielServer.game);
+			player = new Player(name);
 			out.println("ok " + player.id);
 			println("Added player " + player.id + ": " + name);
 		}

@@ -8,6 +8,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
 
+import computercamp.Keksspiel.server.Cum;
+
 public class ClientThread extends Thread
 {
 	private Socket socket;
@@ -111,27 +113,24 @@ public class ClientThread extends Thread
 				{
 					inputLine = in.readLine();
 					String[] frag = inputLine.split(" ");
+					ClientPlayer p = KeksspielClient.player[i];
 					switch(frag[0])
 					{
-						case "name": KeksspielClient.player[i].name = frag[1]; break;
-						case "money": KeksspielClient.player[i].money = Integer.parseInt(frag[1]); break;
-						case "cum_size": KeksspielClient.player[i].cumSize = Float.parseFloat(frag[1]); break;
-						case "jerk_duration": KeksspielClient.player[i].jerkDuration = Integer.parseInt(frag[1]); break;
-						case "jerk": KeksspielClient.player[i].jerk = Integer.parseInt(frag[1]); break;
-						case "came": KeksspielClient.player[i].came = Boolean.parseBoolean(frag[1]); KeksspielClient.player[i].cameLast = Boolean.parseBoolean(frag[2]); break;
+						case "name": p.name = frag[1]; break;
+						case "money": p.money = Integer.parseInt(frag[1]); break;
+						case "cum_size": p.cumSize = Float.parseFloat(frag[1]); break;
+						case "jerk_duration": p.jerkDuration = Integer.parseInt(frag[1]); break;
+						case "jerk": p.jerk = Integer.parseInt(frag[1]); break;
+						case "came": p.came = Boolean.parseBoolean(frag[1]); p.cameLast = Boolean.parseBoolean(frag[2]); break;
 						case "cum" : 
-							if(!frag[1].equals("null"))
+							int cumId = Integer.parseInt(frag[1]);
+							if(!frag[2].equals("null"))
 							{
-								KeksspielClient.player[i].cumX = Float.parseFloat(frag[1]);
-								KeksspielClient.player[i].cumY = Float.parseFloat(frag[2]);
+								p.cum[cumId] = new Cum(Float.parseFloat(frag[2]), Float.parseFloat(frag[3]), p.cumSize);
 							}
-							else
-							{
-								KeksspielClient.player[i].cumX = -1;
-								KeksspielClient.player[i].cumY = -1;
-							}
+							else p.cum[cumId] = null;
 							break;
-						case "dick": KeksspielClient.player[i].dick = new Dick(frag[1]); break;
+						case "dick": p.dick = new Dick(Dick.DickType.valueOf(frag[1]), Float.parseFloat(frag[2]), Float.parseFloat(frag[3])); break;
 						case "end": end = true; break;
 						case "null": KeksspielClient.player[i] = null; end = true; break;
 					}

@@ -1,24 +1,40 @@
 package computercamp.Keksspiel.client;
 
-import java.awt.Color;
 import java.awt.Image;
 
-public class Dick {
-	
+public class Dick 
+{	
 	public float dw = 1f / 20f;
 	public float dh = 1f / 10f;
-	Color color = new Color(0);
-	private final Image texture;
-	public final String name;
+	public DickType type;
 	
-	public Dick(String texturename) 
+	public Dick(DickType type) 
 	{
-		texture = Ressource.get(texturename);
-		name = texturename;
+		this.type = type;
+	}
+	
+	public Dick(DickType type, float width, float height) 
+	{
+		this(type);
+		dw = width; dh = height;
 	}
 	
 	public Image getTexture() 
 	{
-		return texture;
+		return type.texture;
+	}
+	
+	public static enum DickType
+	{
+		BASIC("penis_basic"), BBC("penis_bbc"), LONGSCHLONG("penis_longschlong"), TRIANGLE("penis_triangle");
+		
+		private Image texture;
+		public String textureName;
+		
+		private DickType(String textureName)
+		{
+			this.textureName = textureName;
+			texture = Ressource.get(textureName);
+		}
 	}
 }

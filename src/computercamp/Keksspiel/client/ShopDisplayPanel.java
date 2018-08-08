@@ -35,11 +35,11 @@ public class ShopDisplayPanel extends DisplayPanel
 		drawItem(g, "penis_triangle", 13f/20f, 1f/2f, 1/6f, 1/6f);
 		g.setFont(new Font("Arial", 0, 18));
 		g.drawString("More Cum: 100",(int) (1f/13f * size.width), (int) (1f/2.2f * size.height));
-		g.drawString("Bigger Dick: 250",(int) (1f/2.8f * size.width), (int) (1f/2.2f * size.height));
+		g.drawString("Bigger Dick: 100",(int) (1f/2.8f * size.width), (int) (1f/2.2f * size.height));
 		g.drawString("Cum faster: 50",(int) (13f/19.7f * size.width), (int) (1f/2.2f * size.height));
 		g.drawString("BBC: 20",(int) (1f/13f * size.width), (int) (0.8f/1f * size.height));
 		g.drawString("Long Schlong: 20",(int) (1f/2.8f * size.width), (int) (0.8f/1f * size.height));
-		g.drawString("Dreieck-Cock: 20", (int) (1f/1.52f * size.width), (int) (0.8f/1f * size.height));
+		g.drawString("Dreieck-Cock: 200", (int) (1f/1.52f * size.width), (int) (0.8f/1f * size.height));
 		
 		g.setFont(new Font("Arial", 0, 30));
 		g.setColor(Color.YELLOW);
