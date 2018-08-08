@@ -53,13 +53,29 @@ public class ClientThread extends Thread
 				while(true)
 				{
 					out.println("status");
-					if(in.readLine().equals("start")) break; 
+					String inLine = in.readLine();
+					if(inLine.startsWith("start") || inLine.startsWith("finished")) 
+					{
+						try{KeksspielClient.round = Integer.parseInt(inLine.split(" ")[1]);} catch(Exception e) {KeksspielClient.round = 11;}
+						if(KeksspielClient.round > 10)
+						{
+							KeksspielClient.frame.setTitle("Keksspiel: fertig!");
+							inLine = in.readLine();
+							out.println("cookies");
+							inLine = in.readLine();
+							KeksspielClient.gameDisplay.results = new int[4];
+							for(int i = 0; i < 4; i++) KeksspielClient.gameDisplay.results[i] = Integer.parseInt(inLine.split(" ")[i]);
+							KeksspielClient.gameDisplay.repaint();
+						}
+						break; 
+					}
 					sleep(50);
 				}
 				KeksspielClient.changeDisplay(KeksspielClient.gameDisplay);
 				while(true)
 				{
 					syncPlayers();
+					KeksspielClient.frame.setTitle("Keksspiel: Runde " + KeksspielClient.round);
 					boolean allCame = true;
 					for(ClientPlayer p : KeksspielClient.player) if(p != null) allCame &= p.came;
 					if(allCame) break;
@@ -114,6 +130,7 @@ public class ClientThread extends Thread
 					inputLine = in.readLine();
 					String[] frag = inputLine.split(" ");
 					ClientPlayer p = KeksspielClient.player[i];
+
 					switch(frag[0])
 					{
 						case "name": p.name = frag[1]; break;
@@ -147,6 +164,7 @@ public class ClientThread extends Thread
 				System.out.println("Disconnected from Server");
 				System.exit(-1);
 			}
+			e.printStackTrace();
 		}
 	}
 }

@@ -52,7 +52,10 @@ public class KeksspielServer
 		if(!ready) return;
 		gameStarted = true;
 		for(Player p : players) if(p != null) p.ready = false;
-		round++;
+		if(round++ >= 10)
+		{
+			gameStarted = false;
+		}
 		System.out.println("Starting Round " + round + "!");
 	}
 	

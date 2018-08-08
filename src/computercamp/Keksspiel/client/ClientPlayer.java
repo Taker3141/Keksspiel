@@ -8,7 +8,7 @@ import computercamp.Keksspiel.server.Cum;
 public class ClientPlayer
 {
 	public Dick dick = new Dick(Dick.DickType.BASIC);
-	public String name;
+	public String name = "";
 	public int money = 0;
 	public Cum[] cum = new Cum[3];
 	public float cumSize = 1f/20f;

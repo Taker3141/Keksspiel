@@ -11,6 +11,7 @@ public class KeksspielClient
 	public static ClientPlayer[] player = new ClientPlayer[4];
 	public static int playerIndex;
 	public static ClientThread networkThread;
+	public static int round = 0;
 	
 	public static void main(String[] args)
 	{
@@ -20,16 +21,12 @@ public class KeksspielClient
 		menu = new MenuDisplayPanel();
 		display = menu;
 		frame.add(display);
+		frame.setIconImage(Ressource.get("Keks"));
 		frame.setVisible(true);
 		
 		for(int i = 0; i < 4; i++) player[i] = new ClientPlayer(i, gameDisplay);
 
 		gameDisplay = new GameDisplayPanel();
-	}
-	
-	public static void connetToServer()
-	{
-		
 	}
 	
 	public static void changeDisplay(DisplayPanel newDisplay)

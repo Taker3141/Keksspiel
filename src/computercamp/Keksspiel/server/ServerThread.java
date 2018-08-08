@@ -64,7 +64,8 @@ public class ServerThread extends Thread
 						break;
 					case "jerk": jerk(Integer.parseInt(arg(frag, 1)), Float.parseFloat(arg(frag, 2)), Float.parseFloat(arg(frag, 3))); break;
 					case "shop": shop(arg(frag, 1)); break;
-					case "status": if(KeksspielServer.gameStarted) out.println("start"); else out.println("waiting"); break;
+					case "status": if(KeksspielServer.gameStarted) out.println("start " + KeksspielServer.round); else if(KeksspielServer.round > 10) out.println("finished"); else out.println("waiting"); break;
+					case "cookies": for(Player p : KeksspielServer.players) if(p != null) out.print(p.cookieCounter + " "); else out.print("-1 "); out.println(); break;
 					default: 
 						out.println("unknown " + inputLine);
 						System.out.println("Unknown command: " + inputLine);

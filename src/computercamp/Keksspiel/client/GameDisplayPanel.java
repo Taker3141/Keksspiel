@@ -1,5 +1,6 @@
 package computercamp.Keksspiel.client;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.*;
@@ -14,6 +15,7 @@ public class GameDisplayPanel extends DisplayPanel
 	private Button shopbutton = new Button(15f/17f, 1f/9f, 1f/9f, 1f/9f);
 	private Button buttonReady = new Button(15f/17f, 4f/9f, 1f/9f, 1f/9f);
 	public ClientPlayer player = KeksspielClient.player[KeksspielClient.playerIndex];
+	public int[] results = null;
 	
 	public GameDisplayPanel()
 	{
@@ -65,7 +67,40 @@ public class GameDisplayPanel extends DisplayPanel
 				g.drawImage(Ressource.get("cum"), (int)(c.px * size.width - (size.width * p.cumSize / 2)), (int)(c.py * size.height - (size.height * p.cumSize)), (int)(size.width * p.cumSize), (int)(size.height * p.cumSize * 2), null);
 			}
 		}
+		
+		if(results != null)
+		{
+			g.setColor(Color.WHITE);
+			g.fillRect(size.width / 4, size.height /4, size.width / 2, size.height / 2);
+			g.setColor(Color.BLACK);
+			g.drawRect(size.width / 4, size.height /4, size.width / 2, size.height / 2);
+			g.setColor(Color.GRAY);
+			for(int i = 0; i < results.length; i++)
+			{
+				String message;
+				int number = results[i];
+				if(number < 0 || KeksspielClient.player[i] == null) continue;
+				if(number == 0) message = "musste nie den Keks essen ";
+				else message = "musste " + number + " mal den Keks essen ";
+				boolean lost = true, won = true;
+				for(int j = 0; j < 4; j++)
+				{
+					if(results[j] < 0) continue;
+					lost &= number >= results[j];
+					won &= number <= results[j];
+				}
+				if(lost && won) {g.setColor(Color.YELLOW); message += ": Unentschieden";}
+				else
+				{
+					if(lost) {g.setColor(Color.RED); message += "und hat verloren";}
+					if(won) {g.setColor(Color.GREEN); message += "und hat gewonnen";}
+				}
+				message += ".";
+				g.drawString(KeksspielClient.player[i].name + " " + message, size.width / 4 + 50, size.height / 4 + 50 + i * 50);
+			}
+		}
 	}
+	
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
