@@ -55,6 +55,8 @@ public class KeksspielServer
 		if(round++ >= 10)
 		{
 			gameStarted = false;
+			System.out.println("Game is finished!");
+			return;
 		}
 		System.out.println("Starting Round " + round + "!");
 	}

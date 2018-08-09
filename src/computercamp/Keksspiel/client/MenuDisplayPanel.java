@@ -52,7 +52,7 @@ public class MenuDisplayPanel extends DisplayPanel
 		ip.setSize(300, 32);
 		ip.setLocation(340, 250);
 		ip.addActionListener(listener);
-		ip.setText("127.0.0.1");
+		//ip.setText("127.0.0.1");
 		add(ip);
 		
 		name = new JTextField();

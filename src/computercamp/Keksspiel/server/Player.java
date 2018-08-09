@@ -19,7 +19,7 @@ public class Player
 	public int jerk = 0;
 	public boolean ready = false;
 	public Cum[] cum = new Cum[3];
-	public int cookieCounter = 0;
+	public int cumCounter = 0;
 	
 	public static int pcounter = 0;
 	public static final float[] X_POSITION = {1f/10f, 2f/10f, 6f/10f, 7f/10f};
@@ -52,15 +52,15 @@ public class Player
 		for(int i = 0; i < players.length; i++) if(i != id && players[i] != null) cameLast &= players[i].came;
 		if(cameLast) 
 		{
-			cookieCounter++;
-			int cumCounter = 0;
+			int moneyCounter = 0;
 			for(Player p : players) if(p != null && p.distanceFromCookie <= 0.1f) for(int i = 0; i < cum.length; i++) if(cum[i] != null)
 			{
 				p.cum[i].px += (X_POSITION[id] + 1f/10f) - 0.5f;
 				p.cum[i].py += (1f/3f + 1f/5f) - 0.8f;
-				cumCounter += 25;
+				moneyCounter += 25;
+				cumCounter++;
 			}
-			money = money >= cumCounter ? money - cumCounter : 0;
+			money = money >= moneyCounter ? money - moneyCounter : 0;
 		}
 		KeksspielServer.checkFinished();
 		System.out.println(name + " came!");

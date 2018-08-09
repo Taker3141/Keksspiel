@@ -54,20 +54,21 @@ public class ClientThread extends Thread
 				{
 					out.println("status");
 					String inLine = in.readLine();
-					if(inLine.startsWith("start") || inLine.startsWith("finished")) 
+					if(inLine.startsWith("start")) 
 					{
-						try{KeksspielClient.round = Integer.parseInt(inLine.split(" ")[1]);} catch(Exception e) {KeksspielClient.round = 11;}
-						if(KeksspielClient.round > 10)
-						{
-							KeksspielClient.frame.setTitle("Keksspiel: fertig!");
-							inLine = in.readLine();
-							out.println("cookies");
-							inLine = in.readLine();
-							KeksspielClient.gameDisplay.results = new int[4];
-							for(int i = 0; i < 4; i++) KeksspielClient.gameDisplay.results[i] = Integer.parseInt(inLine.split(" ")[i]);
-							KeksspielClient.gameDisplay.repaint();
-						}
+						try{KeksspielClient.round = Integer.parseInt(inLine.split(" ")[1]);} catch(Exception e) {}
 						break; 
+					}
+					if(inLine.startsWith("finished"))
+					{
+						KeksspielClient.frame.setTitle("Keksspiel: fertig!");
+						inLine = in.readLine();
+						out.println("results");
+						inLine = in.readLine();
+						KeksspielClient.gameDisplay.results = new int[4];
+						for(int i = 0; i < 4; i++) KeksspielClient.gameDisplay.results[i] = Integer.parseInt(inLine.split(" ")[i]);
+						KeksspielClient.gameDisplay.repaint();
+						sleep(1000);
 					}
 					sleep(50);
 				}
@@ -133,7 +134,7 @@ public class ClientThread extends Thread
 
 					switch(frag[0])
 					{
-						case "name": p.name = frag[1]; break;
+						case "name": p.name = frag[1].replace('_', ' '); break;
 						case "money": p.money = Integer.parseInt(frag[1]); break;
 						case "cum_size": p.cumSize = Float.parseFloat(frag[1]); break;
 						case "jerk_duration": p.jerkDuration = Integer.parseInt(frag[1]); break;

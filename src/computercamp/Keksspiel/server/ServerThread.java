@@ -65,7 +65,7 @@ public class ServerThread extends Thread
 					case "jerk": jerk(Integer.parseInt(arg(frag, 1)), Float.parseFloat(arg(frag, 2)), Float.parseFloat(arg(frag, 3))); break;
 					case "shop": shop(arg(frag, 1)); break;
 					case "status": if(KeksspielServer.gameStarted) out.println("start " + KeksspielServer.round); else if(KeksspielServer.round > 10) out.println("finished"); else out.println("waiting"); break;
-					case "cookies": for(Player p : KeksspielServer.players) if(p != null) out.print(p.cookieCounter + " "); else out.print("-1 "); out.println(); break;
+					case "results": for(Player p : KeksspielServer.players) if(p != null) out.print(p.cumCounter + " "); else out.print("-1 "); out.println(); break;
 					default: 
 						out.println("unknown " + inputLine);
 						System.out.println("Unknown command: " + inputLine);
@@ -160,7 +160,7 @@ public class ServerThread extends Thread
 		Player p = KeksspielServer.players[id];
 		out.println("id " + id);
 		if(p == null) {out.println("null"); return;}
-		out.println("name " + p.name);
+		out.println("name " + p.name.replace(' ', '_'));
 		out.println("money " + p.money);
 		out.println("cum_size " + p.cumSize);
 		out.println("jerk_duration " + p.jerkDuration);

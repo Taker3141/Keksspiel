@@ -1,8 +1,6 @@
 package computercamp.Keksspiel.client;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.*;
 
 import computercamp.Keksspiel.server.Cum;
@@ -80,8 +78,8 @@ public class GameDisplayPanel extends DisplayPanel
 				String message;
 				int number = results[i];
 				if(number < 0 || KeksspielClient.player[i] == null) continue;
-				if(number == 0) message = "musste nie den Keks essen ";
-				else message = "musste " + number + " mal den Keks essen ";
+				if(number == 0) message = "musste keine Ladungen essen ";
+				else message = "musste " + number + " Ladungen essen ";
 				boolean lost = true, won = true;
 				for(int j = 0; j < 4; j++)
 				{
@@ -111,10 +109,7 @@ public class GameDisplayPanel extends DisplayPanel
 	public void mousePressed(MouseEvent e)
 	{
 		if(checkbutton(shopbutton, e.getX(), e.getY()) && player.came) KeksspielClient.changeDisplay(new ShopDisplayPanel(player));
-		if(checkbutton(buttonReady, e.getX(), e.getY()) && player.came) 
-		{
-			KeksspielClient.networkThread.reportReady();
-		}
+		if(checkbutton(buttonReady, e.getX(), e.getY()) && player.came) KeksspielClient.networkThread.reportReady();
 	}
 
 	@Override
