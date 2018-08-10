@@ -15,6 +15,8 @@ public class GameDisplayPanel extends DisplayPanel
 	public ClientPlayer player = KeksspielClient.player[KeksspielClient.playerIndex];
 	public int[] results = null;
 	
+	public static final Color[] PLAYER_COLOR = {new Color(0.5f, 0, 0), new Color(0, 0.5f, 0), new Color(0.5f, 0.5f, 0), new Color(0, 0, 0.5f)};
+	
 	public GameDisplayPanel()
 	{
 		addMouseListener(this);
@@ -58,6 +60,7 @@ public class GameDisplayPanel extends DisplayPanel
 		for(int i = 0; i < KeksspielClient.player.length; i++) if(KeksspielClient.player[i] != null)
 		{
 			ClientPlayer p = KeksspielClient.player[i];
+			g.setColor(PLAYER_COLOR[i]);
 			g.drawString(p.name + " : " + p.money + "$" + (p.came ? ", ist " + (p.cameLast ? "als letzter" : "") + " gekommen" : ""), (int) (1f/50f * size.width), (int) (0.2f/2f * size.height * i + 100));
 			for(int j = 0; j < p.cum.length; j++) if(p.cum[j] != null)
 			{

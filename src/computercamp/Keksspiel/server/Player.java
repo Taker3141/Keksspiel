@@ -1,6 +1,6 @@
 package computercamp.Keksspiel.server;
 
-
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -42,22 +42,26 @@ public class Player
 			for(int i = 0; i < 3; i++) cum[i] = new Cum(cumX + r.nextFloat() * 0.1f - 0.05f, cumY + r.nextFloat() * 0.1f - 0.05f, cumSize);
 		}
 		else cum[0] = new Cum(cumX, cumY, cumSize);
-		distanceFromCookie = calculateDistance(1f/2f, 4f/5f);
-		System.out.println("Distance from Cookie: " + distanceFromCookie);
-		if(distanceFromCookie < 0.10) money += 50;
-		else if(distanceFromCookie < 0.15) money += 25;
-		else if(distanceFromCookie < 0.20) money += 10;
+		{
+			distanceFromCookie = calculateDistance(1f/2f + 1f/40f, 4f/5f + 1f/20f);
+			System.out.println("Distance from Cookie: " + distanceFromCookie);
+			float moneyMultiplier = dick.type == Dick.DickType.LONGSCHLONG ? 1.5f : 1;
+			if (distanceFromCookie < 0.06) money += 50 * moneyMultiplier;
+			else if (distanceFromCookie < 0.10) money += 25 * moneyMultiplier;
+			else if (distanceFromCookie < 0.20) money += 10 * moneyMultiplier;
+		}
 		cameLast = true;
 		Player[] players = KeksspielServer.players;
 		for(int i = 0; i < players.length; i++) if(i != id && players[i] != null) cameLast &= players[i].came;
 		if(cameLast) 
 		{
 			int moneyCounter = 0;
-			for(Player p : players) if(p != null && p.distanceFromCookie <= 0.1f) for(int i = 0; i < cum.length; i++) if(cum[i] != null)
+			for(Player p : players) if(p != null && p.distanceFromCookie <= 0.06f) for(int i = 0; i < cum.length; i++) if(cum[i] != null)
 			{
 				p.cum[i].px += (X_POSITION[id] + 1f/10f) - 0.5f;
 				p.cum[i].py += (1f/3f + 1f/5f) - 0.8f;
 				moneyCounter += 25;
+				if(p.dick.type == Dick.DickType.BBC) moneyCounter += 10;
 				cumCounter++;
 			}
 			money = money >= moneyCounter ? money - moneyCounter : 0;

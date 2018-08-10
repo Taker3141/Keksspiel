@@ -96,17 +96,17 @@ public class ServerThread extends Thread
 	{
 		switch(item)
 		{
-			case "penis_bbc": if(player.money >= 20 && player.dick.type != Dick.DickType.BBC) 
+			case "penis_bbc": if(player.money >= 75 && player.dick.type != Dick.DickType.BBC) 
 				{
-					player.money -= 20;
+					player.money -= 75;
 					player.dick.type = Dick.DickType.BBC;
 					out.println("ok");
 				}
 				else out.println("no");
 			break;
-			case "penis_longschlong": if(player.money >= 20 && player.dick.type != Dick.DickType.LONGSCHLONG) 
+			case "penis_longschlong": if(player.money >= 100 && player.dick.type != Dick.DickType.LONGSCHLONG) 
 				{
-					player.money -= 20;
+					player.money -= 100;
 					player.dick.type = Dick.DickType.LONGSCHLONG;
 					out.println("ok");
 				}
@@ -129,9 +129,9 @@ public class ServerThread extends Thread
 				}
 				else out.println("no");
 			break;
-			case "bigger_dick": if(player.money >= 100) 
+			case "bigger_dick": if(player.money >= 50) 
 				{
-					player.money -= 100;
+					player.money -= 50;
 					player.dick.dw += 0.01;
 					player.dick.dh += 0.02;
 					player.cumSize += 0.02f;
