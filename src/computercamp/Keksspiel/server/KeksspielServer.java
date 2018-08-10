@@ -1,6 +1,9 @@
 package computercamp.Keksspiel.server;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
@@ -15,11 +18,20 @@ public class KeksspielServer
 	public static void main(String[] args)
 	{
 		ServerSocket serverSocket = null;
+		File ipFile = new File("ip.txt");
+		ipFile.deleteOnExit();
 		try
 		{
 			threadList = new ArrayList<ServerThread>();
 			serverSocket = new ServerSocket(10000);
 			System.out.println("Keksspiel Server running");
+			try
+			{
+				FileWriter w = new FileWriter(ipFile);
+				w.write(Inet4Address.getLocalHost().getHostAddress());
+				w.close();
+			}
+			catch(Exception e) {e.printStackTrace();}
 			while(true)
 			{
 				Socket clientSocket = serverSocket.accept();

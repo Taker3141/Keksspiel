@@ -16,7 +16,7 @@ public class ClientPlayer
 	public final int id;
 	public float distanceFromCookie = -1;
 	public boolean came = false, cameLast = false;
-	public int jerkDuration = 10000;
+	public int jerkDuration = 50000;
 	public int jerk = 0;
 	public GameDisplayPanel display;
 	public boolean ready = false;

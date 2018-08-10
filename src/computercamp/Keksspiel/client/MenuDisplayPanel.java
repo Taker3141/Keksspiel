@@ -3,6 +3,8 @@ package computercamp.Keksspiel.client;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileReader;
 import java.net.InetAddress;
 import java.net.SocketException;
 
@@ -19,6 +21,18 @@ public class MenuDisplayPanel extends DisplayPanel
 		addMouseListener(this);
 		this.setLayout(null);
 		KeksspielClient.frame.addKeyListener(this);
+		
+		String defaultIp = "";
+		File ipFile = new File("ip.txt");
+		if(ipFile.exists()) try
+		{
+			FileReader r = new FileReader(ipFile);
+			char[] chars = new char[64];
+			r.read(chars);
+			defaultIp = new String(chars).split(" |\r|\n|\0")[0];
+			r.close();
+		}
+		catch(Exception e) {e.printStackTrace();}
 		
 		ActionListener listener = (ActionEvent e) ->
 		{
@@ -52,7 +66,7 @@ public class MenuDisplayPanel extends DisplayPanel
 		ip.setSize(300, 32);
 		ip.setLocation(340, 250);
 		ip.addActionListener(listener);
-		//ip.setText("127.0.0.1");
+		ip.setText(defaultIp);
 		add(ip);
 		
 		name = new JTextField();

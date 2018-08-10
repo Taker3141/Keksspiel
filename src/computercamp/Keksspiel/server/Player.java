@@ -1,8 +1,6 @@
 package computercamp.Keksspiel.server;
 
-import java.awt.Color;
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 import computercamp.Keksspiel.client.Dick;
 
@@ -15,7 +13,7 @@ public class Player
 	public final int id;
 	public float distanceFromCookie = -1;
 	public boolean came = false, cameLast = false;
-	public int jerkDuration = 10000;
+	public int jerkDuration = 50000;
 	public int jerk = 0;
 	public boolean ready = false;
 	public Cum[] cum = new Cum[3];
@@ -26,7 +24,6 @@ public class Player
 
 	public Player(String name)
 	{
-		super();
 		id = pcounter;
 		pcounter++;
 		this.name = name;
